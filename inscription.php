@@ -2,7 +2,6 @@
 
    session_start();
    //include("../../Code/Php/php_coockie.php");
-   //bonjour
    try
    {
       $bdd = new PDO('mysql:host=localhost;dbname=site_jeux;charset=utf8', 'root', 'root');
