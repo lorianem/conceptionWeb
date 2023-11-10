@@ -1,4 +1,8 @@
 <?php include("code/EnTete.php") ?>
+
+
+
+
 <?php
 
 if(isset($_POST['envoyer']))
@@ -201,4 +205,4 @@ else
 	</main>
 
 
-<?php include("code/PiedPage.html") ?>
+<?php include("code/PiedPage.h") ?>

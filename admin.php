@@ -1,9 +1,12 @@
 <?php include("code/EnTete.php") ?>
-<<?php 
-	
-	
- ?>
+<?php include("code/relocalisationVisiteur.php")?>
+<?php 
+	if($_SESSION["role"]!= "1")
+	{
+		header("Location: index.php");
+	}
 
+?>
 <section id="ajoutJeu">
 	<div><label>Nom</label><input type="text" name=""> </div>
 	<div><label>Description</label><input type="text" name=""> </div>

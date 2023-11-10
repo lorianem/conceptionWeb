@@ -40,7 +40,7 @@ if (isset($_POST['connexion'])) // Si on appui sur le bouton
           $_SESSION['prenom'] = $resultat['prenom'];
           $_SESSION['nom'] = $resultat['nom'];
           $_SESSION['role'] = $resultat['role'];
-          header("Location : index.php");
+          header("Location: index.php");
 
           
           //echo $isPasswordCorrect;
