@@ -1,19 +1,4 @@
-<?php  //include(connection_BDD.php);   
-
-   session_start();
-   //include("../../Code/Php/php_coockie.php");
-   try
-   {
-      $bdd = new PDO('mysql:host=localhost;dbname=site_jeux;charset=utf8', 'root', 'root');
-   }
-   catch(Exception $e)
-   {
-           die('Erreur : '.$e->getMessage());
-   }
-
-
-
-?>
+<?php include("EnTete.php") ?>
 
 <?php 
 
@@ -91,15 +76,8 @@ if (isset($_POST['connexion'])) // Si on appui sur le bouton
  ?>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>Lukido</title>
-</head>
-<body>
-     <div align="center"  class="page">
+
+      <div align="center"  class="page">
          <h2>Connexion</h2>
          <br />
          <form method="POST" action="">
@@ -144,7 +122,4 @@ if (isset($_POST['connexion'])) // Si on appui sur le bouton
       </div>
 
 
-   </body>
-</html>
-</body>
-</html>
+<?php include("PiedPage.php") ?>
