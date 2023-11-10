@@ -39,6 +39,8 @@ if (isset($_POST['connexion'])) // Si on appui sur le bouton
           $_SESSION['mail'] = $resultat['email'];
           $_SESSION['prenom'] = $resultat['prenom'];
           $_SESSION['nom'] = $resultat['nom'];
+          $_SESSION['role'] = $resultat['role'];
+          header("Location : index.php");
 
           
           //echo $isPasswordCorrect;
@@ -122,4 +124,4 @@ if (isset($_POST['connexion'])) // Si on appui sur le bouton
       </div>
 
 
-<?php include("code/PiedPage.php") ?>
+<?php include("code/PiedPage.html") ?>

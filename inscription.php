@@ -201,4 +201,4 @@ else
 	</main>
 
 
-<?php include("code/PiedPage.php") ?>
+<?php include("code/PiedPage.html") ?>

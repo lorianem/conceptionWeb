@@ -12,10 +12,41 @@
 <body>
 	<nav>
 		<a href="index.php"> Home </a>
-		<a href="connection.php"> Connection </a>
-		<a href="inscription.php"> Inscription </a>
-		<a href="admin.php"> Admin </a>
-		<a href="jeux.php"> Jeux </a>
+
+
+		<?php
+			if(isset($_SESSION) && !empty($_SESSION))
+			{
+				if(($_SESSION['role'] == "0"))	
+				{
+					?>
+						<a href="jeux.php"> jeux </a>
+						<a href="planning.php"> planning </a>
+						<a href="profil.php">Profil</a> / 
+						<a href="code/deconnection.php">deconnection</a>
+					<?php  
+				}
+				elseif($_SESSION['role'] == "1")
+				{
+					?>
+						<a href="jeux.php"> jeux </a>
+						<a href="planning.php"> planning </a>
+						<a href="profil.php"> admin </a>
+					<?php 
+				}
+				
+
+			}
+			else
+			{
+				?>
+				<a href="connection.php"> Connection </a> / 
+				<a href="inscription.php"> Inscription </a>
+				<?php  
+			}
+		?>
+		
+		
 
 	</nav>
 
