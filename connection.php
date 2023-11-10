@@ -1,4 +1,4 @@
-<?php include("EnTete.php") ?>
+<?php include("code/EnTete.php") ?>
 
 <?php 
 
@@ -122,4 +122,4 @@ if (isset($_POST['connexion'])) // Si on appui sur le bouton
       </div>
 
 
-<?php include("PiedPage.php") ?>
+<?php include("code/PiedPage.php") ?>

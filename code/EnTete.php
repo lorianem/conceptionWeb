@@ -14,5 +14,8 @@
 		<a href="index.php"> Home </a>
 		<a href="connection.php"> Connection </a>
 		<a href="inscription.php"> Inscription </a>
+		<a href="admin.php"> Admin </a>
+		<a href="jeux.php"> Jeux </a>
+
 	</nav>
 

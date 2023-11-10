@@ -1,20 +1,4 @@
-<?php  //include(connection_BDD.php);   
-
-   session_start();
-   //include("../../Code/Php/php_coockie.php");
-   try
-   {
-      $bdd = new PDO('mysql:host=localhost;dbname=site_jeux;charset=utf8', 'root', 'root');
-   }
-   catch(Exception $e)
-   {
-           die('Erreur : '.$e->getMessage());
-   }
-
-
-
-?>
-
+<?php include("code/EnTete.php") ?>
 <?php
 
 if(isset($_POST['envoyer']))
@@ -131,19 +115,7 @@ else
 
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Lukido</title>
-   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-</head>
-<body>
-	<nav>
-		<img src="images/logo">
-	</nav>
 	<main>
 		<div align="center"  class="page">
          <h2>Inscription</h2>
@@ -228,5 +200,5 @@ else
 
 	</main>
 
-</body>
-</html>
+
+<?php include("code/PiedPage.php") ?>
