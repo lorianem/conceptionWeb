@@ -1,8 +1,8 @@
 <?php include("code/EnTete.php") ?>
 
 
-
-
+<?php echo ($_SESSION["role"] == 0);
+ ?>
 
 
 

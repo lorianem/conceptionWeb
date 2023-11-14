@@ -32,6 +32,8 @@
 						<a href="jeux.php"> jeux </a>
 						<a href="planning.php"> planning </a>
 						<a href="profil.php"> admin </a>
+						<a href="profil.php">Profil</a> / 
+						<a href="code/deconnection.php">deconnection</a>
 					<?php 
 				}
 				
