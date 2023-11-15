@@ -12,14 +12,32 @@
 <?php 
 if (isset($_POST['subAjoutJeu']))
 {
+	echo "ok";
 	if(isset($_FILES['image_jeux']) AND !empty($_FILES['image_jeux']['name']) 
 		AND isset($_FILES['regle_jeux']) AND !empty($_FILES['regle_jeux']['name']) )
 	{
+		echo "ok";
 		$nom_jeu = htmlspecialchars($_POST["nom_jeu"]);
 		$cat_jeu = $_POST["nom_jeu"];
 		if(!empty($cat_jeu) && !empty($nom_jeu))
 		{
-			echo "wouah";
+			echo "ok";
+			$extension_image = array('jpg', 'jpeg', 'png');
+			$extension_regle = array('pdf');
+
+			$extensionImageUpload = strtolower(substr(strrchr($_FILES['image_jeux']['name'], '.'), 1));
+			$extensionRegleUpload = strtolower(substr(strrchr($_FILES['regle_jeux']['name'], '.'), 1));
+
+			if(in_array($extensionImageUpload, $extension_image) && in_array($extensionRegleUpload, $extension_regle))
+			{
+				echo "ok";
+				$cheminImage = "image/jeu/"".".$nom_jeu.$extensionImageUpload;
+                $resultat = move_uploaded_file($_FILES['image_jeux']['tmp_name'], $cheminImage);
+
+                $cheminRegle = "document/regle/"".".$nom_jeu.$extensionImageUpload;
+                $resultat = move_uploaded_file($_FILES['regle_jeux']['tmp_name'], $cheminRegle);
+			}
+
 		}
 	}
 }
