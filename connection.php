@@ -32,7 +32,7 @@ if (isset($_POST['connexion'])) // Si on appui sur le bouton
         if ($mdp == $resultat['mdp'])
         {
          
-          //var_dump($isPasswordCorrect); 
+
           //session_start();
           $_SESSION['pseudo'] = $resultat['pseudo'];
           $_SESSION['id'] = $resultat['id'];
@@ -43,13 +43,12 @@ if (isset($_POST['connexion'])) // Si on appui sur le bouton
           header("Location: index.php");
 
           
-          //echo $isPasswordCorrect;
+
           if(isset($_POST['se_souvenir'])){
 
             setcookie('pseudo',$pseudo,time()+365*24*3600,null,null,false,true);
             setcookie('mdp',$mdp,time()+365*24*3600,null,null,false,true);
            
-           // var_dump(array($_COOKIE));
           }
             echo  "connecté";
         }

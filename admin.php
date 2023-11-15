@@ -7,6 +7,8 @@
 		header("Location: index.php");
 	}
 ?>
+
+
 <?php 
 if (isset($_POST['subAjoutJeu']))
 {
@@ -34,19 +36,24 @@ if (isset($_POST['subAjoutJeu']))
 
 
 <section id="ajoutJeu">
-	<div><label>Nom</label><input type="text" id="nom_jeu" name=""> </div>
-	<div><label>Description</label><input type="text" name=""> </div>
-	<div><label>Catégorie</label>
+	<div><label>Nom : </label><input type="text" id="nom_jeu" name=""> </div>
+	<div><label>Description : </label><input type="text" name=""> </div>
+	<div><label>Catégorie : </label>
 			<select id="cat_select">
-				<option>Coopératif</option>
-				<option>Seul</option>
+				<?php 
+					$requetes = $bdd->prepare("SELECT * FROM categorie"); 
+				    $requetes->execute();
+					while($resultat =  $requetes->fetch())
+					{?>
+						<option label="<?= $resultat['categorie'] ?>" >1<?= $resultat['categorie'] ?></option>
+					<?php  }
+				?>
 			</select>
 	</div>
-	<div><label>Règle de jeu</label><input type="file" id="regle" id=""  name=""> </div>
-	<div><label>Image</label><input type="file" id="image_jeux" name="image jeux"> </div>
-	<div><label>Ajouter</label><input id="ajoutJeu" type="submit" id="subAjoutJeu" name=""> </div>
-</section>
-
+	<div><label>Règle de jeu : </label><input type="file" id="regle" id=""  name=""> </div>
+	<div><label>Image : </label><input type="file" id="image_jeux" name="image jeux"> </div><br>
+	<div><label>Ajouter : </label><input id="ajoutJeu" type="submit" id="subAjoutJeu" name=""> </div>
+</section><br><br><br>Q
 
 <section id="ajoutAdmin">
 	<div><label>Pseudo du nouvel admin</label><input type="text" id="" name=""> </div>
