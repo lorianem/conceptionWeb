@@ -12,34 +12,49 @@
 <?php 
 if (isset($_POST['subAjoutJeu']))
 {
-	echo "ok";
-	if(isset($_FILES['image_jeux']) AND !empty($_FILES['image_jeux']['name']) 
-		AND isset($_FILES['regle_jeux']) AND !empty($_FILES['regle_jeux']['name']) )
+
+	if(isset($_FILES['image_jeu']) AND !empty($_FILES['image_jeu']['name']) 
+		AND isset($_FILES['regle_jeu']) AND !empty($_FILES['regle_jeu']['name']) )
 	{
-		echo "ok";
-		$nom_jeu = htmlspecialchars($_POST["nom_jeu"]);
-		$cat_jeu = $_POST["nom_jeu"];
+
+		$nom_jeu = ucfirst(htmlspecialchars($_POST["nom_jeu"]));
+		$description_jeu = htmlspecialchars($_POST["description"]);
+		$cat_jeu = $_POST["cat_select"];
 		if(!empty($cat_jeu) && !empty($nom_jeu))
 		{
-			echo "ok";
-			$extension_image = array('jpg', 'jpeg', 'png');
-			$extension_regle = array('pdf');
 
-			$extensionImageUpload = strtolower(substr(strrchr($_FILES['image_jeux']['name'], '.'), 1));
-			$extensionRegleUpload = strtolower(substr(strrchr($_FILES['regle_jeux']['name'], '.'), 1));
+			
+			$reqjeu = $bdd->prepare("SELECT * FROM jeux WHERE nom = ?"); 
+			$reqjeu->execute(array($nom_jeu));
+			$jeuExist = $reqjeu->rowCount(); 
 
-			if(in_array($extensionImageUpload, $extension_image) && in_array($extensionRegleUpload, $extension_regle))
+			if($jeuExist == 0)
 			{
-				echo "ok";
-				$cheminImage = "image/jeu/"".".$nom_jeu.$extensionImageUpload;
-                $resultat = move_uploaded_file($_FILES['image_jeux']['tmp_name'], $cheminImage);
+				
+				$requete = $bdd -> prepare("INSERT INTO jeux(nom, description, id_categorie) VALUES(?, ?, ?)");
+				$requete -> execute(array($nom_jeu,$description_jeu,$cat_jeu));
+				$extension_image = array('jpg', 'jpeg', 'png');
+				$extension_regle = array('pdf');
 
-                $cheminRegle = "document/regle/"".".$nom_jeu.$extensionImageUpload;
-                $resultat = move_uploaded_file($_FILES['regle_jeux']['tmp_name'], $cheminRegle);
+				$extensionImageUpload = strtolower(substr(strrchr($_FILES['image_jeu']['name'], '.'), 1));
+				$extensionRegleUpload = strtolower(substr(strrchr($_FILES['regle_jeu']['name'], '.'), 1));
+
+				if(in_array($extensionImageUpload, $extension_image) && in_array($extensionRegleUpload, $extension_regle))
+				{
+					$cheminImage = "image/jeux/".$nom_jeu.$extensionImageUpload;
+	                $resultat = move_uploaded_file($_FILES['image_jeu']['tmp_name'], $cheminImage);
+
+	                $cheminRegle = "document/regle/".$nom_jeu.$extensionImageUpload;
+	                $resultat = move_uploaded_file($_FILES['regle_jeu']['tmp_name'], $cheminRegle);
+				}
 			}
+
+
+				
 
 		}
 	}
+
 }
 
 
@@ -47,36 +62,40 @@ if (isset($_POST['subAjoutJeu']))
 
 ?>
 
-
-
-
-
-
-
 <section id="ajoutJeu">
-	<div><label>Nom : </label><input type="text" id="nom_jeu" name=""> </div>
-	<div><label>Description : </label><input type="text" name=""> </div>
-	<div><label>Catégorie : </label>
-			<select id="cat_select">
-				<?php 
-					$requetes = $bdd->prepare("SELECT * FROM categorie"); 
-				    $requetes->execute();
-					while($resultat =  $requetes->fetch())
-					{?>
-						<option label="<?= $resultat['categorie'] ?>" >1<?= $resultat['categorie'] ?></option>
-					<?php  }
-				?>
-			</select>
-	</div>
-	<div><label>Règle de jeu : </label><input type="file" id="regle" id=""  name=""> </div>
-	<div><label>Image : </label><input type="file" id="image_jeux" name="image jeux"> </div><br>
-	<div><label>Ajouter : </label><input id="ajoutJeu" type="submit" id="subAjoutJeu" name=""> </div>
+	<form method="POST" enctype="multipart/form-data">
+		<div><label>Nom : </label><input type="text" id="nom_jeu" name="nom_jeu"> </div>
+		<div><label>Description : </label><input type="text" name="description"> </div>
+		<div><label>Catégorie : </label>
+				<select id="cat_select" name="cat_select">
+					<?php 
+						$requetes = $bdd->prepare("SELECT * FROM categorie"); 
+					    $requetes->execute();
+						while($resultat =  $requetes->fetch())
+						{?>
+							<option value="<?= $resultat['id'] ?>" ><?= $resultat['categorie'] ?></option>
+						<?php  }
+					?>
+				</select>
+		</div>
+		<div><label>Règle de jeu : </label><input type="file" name="regle_jeu"> </div>
+		<div><label>Image : </label><input type="file" name="image_jeu"> </div><br>
+		<div><label>Ajouter : </label><input id="subAjoutJeu" type="submit" name="subAjoutJeu"> </div>
+	</form>
+		
 </section><br><br><br>Q
 
 <section id="ajoutAdmin">
 	<div><label>Pseudo du nouvel admin</label><input type="text" id="" name=""> </div>
 	<div><label>Votre mot de passe</label><input type="password" name=""> </div>
-	<div><label>Ajouter</label><input id="subAjoutAdmin" type="submit" name=""> </div>
+	<div><label>Ajouter</label><input id="subAjoutAdmin" type="submit" name="subAjoutAdmin"> </div>
+</section>
+
+
+<section id="ajoutAdmin">
+	<div><label>Pseudo du nouvel admin</label><input type="text" id="" name=""> </div>
+	<div><label>Votre mot de passe</label><input type="password" name=""> </div>
+	<div><label>Ajouter</label><input id="subAjoutAdmin" type="submit" name="subAjoutAdmin"> </div>
 
 </section>
 
