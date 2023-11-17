@@ -1,0 +1,64 @@
+body
+{
+	margin: 0;
+	padding:0;
+}
+
+
+nav
+{
+	padding : 20px;
+	background: #F2F2F2;
+
+	font-size : 1.1em;
+	font-weight: bold;
+}
+
+nav img
+{
+	height: 50px ;
+	margin-right: 50px;
+}
+
+nav a 
+{
+	margin: 15px;
+	text-decoration: none;
+	color: black;
+}
+
+nav .profil
+{
+	display: inline-block;
+
+}
+
+#nav1:hover
+{
+	color : red;
+}
+
+#nav2:hover
+{
+	color : blue;
+}
+
+#nav3:hover
+{
+	color : green;
+}
+
+#nav4:hover
+{
+	color : chocolate;
+}
+
+#nav5:hover
+{
+	color: purple;
+}
+
+#nav6:hover
+{
+	color : pink;
+}

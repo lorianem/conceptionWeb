@@ -100,7 +100,6 @@ if (isset($_POST['subAjoutEvent']))
 
 
 
-
 <section id="ajoutEvent">
 	<h2>Ajout d'un évènement </h2>
 	<form method="POST" enctype="multipart/form-data">
@@ -121,7 +120,6 @@ if (isset($_POST['subAjoutEvent']))
 		<div><label>Ajouter : </label><input id="subAjoutEvent" type="submit" name="subAjoutEvent"> </div>
 	</form>
 </section><br>
-
 
 
 <section id="suppressionEvent">
@@ -147,7 +145,6 @@ if (isset($_POST['subAjoutEvent']))
 		<div><label>Ajouter</label><input id="subAjoutCategorie" type="submit" name="subAjoutCategorie"> </div>
 	</form>
 </section><br>
-
 
 
 <section id="ajoutAdmin">
