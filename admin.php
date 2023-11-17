@@ -50,17 +50,20 @@ if (isset($_POST['subAjoutJeu']))
 
 		}
 	}
+} 
+?>
 
-} ?>
+
+
 
 <?php 
 if (isset($_POST['subAjoutCategorie']))
 {
-	$nom_categorie = ucfirst(htmlspecialchars($_POST["nom_jeu"]));
-	if (isset($nom_categorie)) {
-		$reqcat = $bdd->prepare("SELECT * FROM jeux WHERE nom = ?"); 
-		$reqcat>execute(array($nom_categorie));
-		$catExist = $reqcat>rowCount(); 
+	$nom_categorie = ucfirst(htmlspecialchars($_POST["nom_categorie"]));
+	if (!empty($nom_categorie)) {
+		$reqcat = $bdd->prepare("SELECT * FROM categorie WHERE nom = ?"); 
+		$reqcat->execute(array($nom_categorie));
+		$catExist = $reqcat->rowCount(); 
 		if($catExist == 0)
 		{
 			$requete = $bdd -> prepare("INSERT INTO categorie(nom) VALUES(?)");
@@ -68,11 +71,67 @@ if (isset($_POST['subAjoutCategorie']))
 		}
 	}
 }
+?>
 
 
+<?php 
+if (isset($_POST['subAjoutEvent']))
+{
+
+	$idJeu = ucfirst(htmlspecialchars($_POST["jeuSelect"]));
+	$difficulte = htmlspecialchars($_POST["difSelect"]);
+	$date = $_POST["dateEvent"];
+	$duree = $_POST["dureeEvent"];
+	$nbPlace = $_POST["nbPlace"];
 
 
- ?>
+	if ( !empty($idJeu) && !empty($difficulte) && !empty($date) &&  !empty($duree) && !empty($nbPlace) )
+
+	{    
+		echo "1";
+		$requete = $bdd -> prepare("INSERT INTO planning(id_jeux, places, dateDebut, niveau, duree) VALUES (?,?,?,?,?)");
+		$requete -> execute(array($idJeu, $nbPlace, $date, $duree, $nbPlace));
+	}
+}
+?>
+
+<?php 
+
+if (isset($_POST['subAjoutAdmin'])) 
+{
+	echo "1";
+	$pseudoAjoutAdmin = htmlspecialchars($_POST["pseudoAjoutAdmin"]);
+	if (!empty($pseudoAjoutAdmin)) {
+		echo "1";
+		$reqAdmin= $bdd->prepare("SELECT * FROM users WHERE pseudo = ?"); 
+		$reqAdmin->execute(array($pseudoAjoutAdmin));
+		$userExist = $reqAdmin->rowCount();
+		if($userExist == 1) 
+		{
+			echo "1";
+			$requete = $bdd -> prepare("UPDATE users SET role=1 WHERE pseudo=?");
+			$requete -> execute(array($pseudoAjoutAdmin));
+		}
+	}
+}
+?>
+
+<?php 
+
+if (isset($_POST['subSuppEvent'])) 
+{
+	$idEvent = $_POST["eventSelect"];
+	if(!empty($idEvent))
+	{
+
+		$requete = $bdd -> prepare("DELETE FROM planning WHERE id = ?");
+		$requete -> execute(array($idEvent));
+	}
+	
+}
+
+?>
+
 
 <section id="ajoutJeu">
 	<h2>Ajout d'un nouveau jeu</h2>
@@ -94,8 +153,7 @@ if (isset($_POST['subAjoutCategorie']))
 		<div><label>Règle de jeu : </label><input type="file" name="regle_jeu"> </div>
 		<div><label>Image : </label><input type="file" name="image_jeu"> </div><br>
 		<div><label>Ajouter : </label><input id="subAjoutJeu" type="submit" name="subAjoutJeu"> </div>
-	</form>
-		
+	</form>		
 </section><br>
 
 
@@ -115,7 +173,7 @@ if (isset($_POST['subAjoutCategorie']))
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Jeu : </label>
 
-				<select id="cat_select" name="cat_select">
+				<select id="jeuSelect" name="jeuSelect">
 					<?php 
 						$requetes = $bdd->prepare("SELECT * FROM jeux"); 
 					    $requetes->execute();
@@ -128,7 +186,7 @@ if (isset($_POST['subAjoutCategorie']))
 		</div>
 		<div>
 			<label>Difficulté : </label>
-			<select id="selectDif" name="selectDif">
+			<select id="difSelect" name="difSelect">
 				<option value="Tous">Tous</option>
 				<option value="Neophyte">Néophyte</option>
 				<option value="Debutant">Débutant</option>
@@ -137,7 +195,9 @@ if (isset($_POST['subAjoutCategorie']))
 				<option value="Maitre">Maitre</option>
 			</select>
 		</div>
-		<div><label>Date évènement : </label><input name="date_event" type="date" > </div><br>
+		<div><label>Date évènement : </label><input name="dateEvent" type="date" > </div>
+		<div><label>Temps de jeu : </label><input type="number" name="dureeEvent"> </div>
+		<div><label>Nombre de place : </label><input type="number" name="nbPlace"> </div><br>
 		<div><label>Ajouter : </label><input id="subAjoutEvent" value="Ajouter" type="submit" name="subAjoutEvent"> </div>
 	</form>
 </section><br>
@@ -147,7 +207,7 @@ if (isset($_POST['subAjoutCategorie']))
 	<h2>Suppression évènement </h2>
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Catégorie : </label>
-				<select id="cat_select" name="cat_select">
+				<select id="eventSelect" name="eventSelect">
 					<?php 
 						$requetes = $bdd->prepare("SELECT * FROM planning"); 
 					    $requetes->execute();
@@ -158,22 +218,22 @@ if (isset($_POST['subAjoutCategorie']))
 					   		 $resulJeu =  $reqJeu->fetch();
 							?>
 
-							<option value="<?= $resultat['id'] ?>" >   Jeu : <?= $$resulJeu['nom'] ?> date :   <?= $resultat['creneau'] ?> </option>
+							<option value="<?= $resultat['id'] ?>" >   <?= $resulJeu['nom'] ?>, date :   <?= $resultat['dateDebut'] ?> </option>
 						<?php  }
 					?>
 				</select>
 		</div>
-		<div><label>Suprrimer : </label><input id="subAjoutCategorie" value="Supprimer" type="submit" name="subAjoutCategorie"> </div>
+		<div><label>Supprimer : </label><input id="subSuppEvent" value="Supprimer" type="submit" name="subSuppEvent"> </div>
 	</form>
 </section><br>
 
 
 <section id="ajoutAdmin">
-	<h2>Ajout d'un administrateur</h2>
-	<div><label>Pseudo du nouvel admin : </label><input type="text" id="" name=""> </div>
-	<div><label>Votre mot de passe : </label><input type="password" name=""> </div>
-	<div><label>Ajouter : </label><input id="subAjoutAdmin" value="Ajouter" type="submit" name="subAjoutAdmin"> </div>
-
+	<form method="POST" enctype="multipart/form-data">
+		<h2>Ajout d'un administrateur</h2>
+		<div><label>Pseudo du nouvel admin : </label><input type="text" id="pseudoAjoutAdmin" name="pseudoAjoutAdmin"> </div>
+		<div><label>Ajouter : </label><input id="subAjoutAdmin" value="Ajouter" type="submit" name="subAjoutAdmin"> </div>
+	</form>
 </section>
 
 

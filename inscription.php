@@ -119,7 +119,7 @@ else
 
 ?>
 
-
+   <script src="https://www.google.com/recaptcha/api.js"></script>
 	<main>
 		<div align="center"  class="page">
          <h2>Inscription</h2>
