@@ -54,9 +54,19 @@ if (isset($_POST['subAjoutJeu']))
 } ?>
 
 <?php 
-if (isset($_POST['subAjoutEvent']))
+if (isset($_POST['subAjoutCategorie']))
 {
-
+	$nom_categorie = ucfirst(htmlspecialchars($_POST["nom_jeu"]));
+	if (isset($nom_categorie)) {
+		$reqcat = $bdd->prepare("SELECT * FROM jeux WHERE nom = ?"); 
+		$reqcat>execute(array($nom_categorie));
+		$catExist = $reqcat>rowCount(); 
+		if($catExist == 0)
+		{
+			$requete = $bdd -> prepare("INSERT INTO categorie(nom) VALUES(?)");
+			$requete -> execute(array($nom_categorie));
+		}
+	}
 }
 
 
@@ -76,7 +86,7 @@ if (isset($_POST['subAjoutEvent']))
 					    $requetes->execute();
 						while($resultat =  $requetes->fetch())
 						{?>
-							<option value="<?= $resultat['id'] ?>" ><?= $resultat['categorie'] ?></option>
+							<option value="<?= $resultat['id'] ?>" ><?= $resultat['nom'] ?></option>
 						<?php  }
 					?>
 				</select>
@@ -94,7 +104,7 @@ if (isset($_POST['subAjoutEvent']))
 	<h2>Ajout d'une catégorie de jeu </h2>
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Nom catégorie</label><input type="text" id="" name="nom_categorie"> </div><br>
-		<div><label>Ajouter : </label><input id="subAjoutCategorie" type="submit" name="subAjoutCategorie"> </div>
+		<div><label>Ajouter : </label><input id="subAjoutCategorie" value="Ajouter" type="submit" name="subAjoutCategorie"> </div>
 	</form>
 </section><br>
 
@@ -116,8 +126,19 @@ if (isset($_POST['subAjoutEvent']))
 					?>
 				</select>
 		</div>
+		<div>
+			<label>Difficulté : </label>
+			<select id="selectDif" name="selectDif">
+				<option value="Tous">Tous</option>
+				<option value="Neophyte">Néophyte</option>
+				<option value="Debutant">Débutant</option>
+				<option value="Intermediaire">Intermediaire</option>
+				<option value="Expert" >Expert</option>
+				<option value="Maitre">Maitre</option>
+			</select>
+		</div>
 		<div><label>Date évènement : </label><input name="date_event" type="date" > </div><br>
-		<div><label>Ajouter : </label><input id="subAjoutEvent" type="submit" name="subAjoutEvent"> </div>
+		<div><label>Ajouter : </label><input id="subAjoutEvent" value="Ajouter" type="submit" name="subAjoutEvent"> </div>
 	</form>
 </section><br>
 
@@ -142,16 +163,16 @@ if (isset($_POST['subAjoutEvent']))
 					?>
 				</select>
 		</div>
-		<div><label>Ajouter</label><input id="subAjoutCategorie" type="submit" name="subAjoutCategorie"> </div>
+		<div><label>Suprrimer : </label><input id="subAjoutCategorie" value="Supprimer" type="submit" name="subAjoutCategorie"> </div>
 	</form>
 </section><br>
 
 
 <section id="ajoutAdmin">
 	<h2>Ajout d'un administrateur</h2>
-	<div><label>Pseudo du nouvel admin</label><input type="text" id="" name=""> </div>
-	<div><label>Votre mot de passe</label><input type="password" name=""> </div>
-	<div><label>Ajouter</label><input id="subAjoutAdmin" type="submit" name="subAjoutAdmin"> </div>
+	<div><label>Pseudo du nouvel admin : </label><input type="text" id="" name=""> </div>
+	<div><label>Votre mot de passe : </label><input type="password" name=""> </div>
+	<div><label>Ajouter : </label><input id="subAjoutAdmin" value="Ajouter" type="submit" name="subAjoutAdmin"> </div>
 
 </section>
 
