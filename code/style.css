@@ -24,6 +24,41 @@ nav a
 {
 	margin: 15px;
 	text-decoration: none;
-	color: red;
+	color: black;
 }
 
+nav .profil
+{
+	display: inline-block;
+
+}
+
+#nav1:hover
+{
+	color : red;
+}
+
+#nav2:hover
+{
+	color : blue;
+}
+
+#nav3:hover
+{
+	color : green;
+}
+
+#nav4:hover
+{
+	color : chocolate;
+}
+
+#nav5:hover
+{
+	color: purple;
+}
+
+#nav6:hover
+{
+	color : pink;
+}

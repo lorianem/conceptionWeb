@@ -13,7 +13,7 @@
 	<nav>
 		<img src="image/logo.png">
 
-		<a href="index.php"> Home </a>
+		<a id="nav1" href="index.php"> Home </a>
 
 
 		<?php
@@ -22,11 +22,11 @@
 				if(($_SESSION['role'] == "0"))	
 				{
 					?>
-						<a href="jeux.php"> jeux </a>
-						<a href="planning.php"> planning </a>
+						<a id="nav2" href="jeux.php"> jeux </a>
+						<a id="nav3" href="planning.php"> planning </a>
 						<div class="profil">
-							<a href="profil.php">Profil</a> / 
-							<a href="code/deconnection.php">deconnection</a>
+							<a id="nav5" href="profil.php">Profil</a> 
+							<a id="nav6" href="code/deconnection.php">deconnection</a>
 						</div>
 							
 					<?php  
@@ -34,12 +34,12 @@
 				elseif($_SESSION['role'] == "1")
 				{
 					?>
-						<a href="jeux.php"> jeux </a>
-						<a href="planning.php"> planning </a>
-						<a href="admin.php"> admin </a>
+						<a id="nav2" href="jeux.php"> jeux </a>
+						<a id="nav3" href="planning.php"> planning </a>
+						<a id="nav4" href="admin.php"> admin </a>
 						<div class="profil">
-							<a href="profil.php">Profil</a> / 
-							<a href="code/deconnection.php">deconnection</a>
+							<a id="nav5"  href="profil.php">Profil</a> 
+							<a id="nav6"  href="code/deconnection.php">deconnection</a>
 						</div>
 						
 					<?php 
@@ -51,8 +51,8 @@
 			{
 				?>
 				<div class="profil">
-					<a href="connection.php"> Connection </a> / 
-					<a href="inscription.php"> Inscription </a>
+					<a id="nav5" href="connection.php"> Connection </a> 
+					<a id="nav6" href="inscription.php"> Inscription </a>
 				</div>
 				
 				<?php  
