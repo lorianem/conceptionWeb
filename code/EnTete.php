@@ -6,11 +6,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>LUKIDO</title>
-	<link rel="stylesheet" href="style.css">
-	<link rel="shortcut icon" href="image/icone.jpg">
+	<link rel="stylesheet" href="code/style.css">
+	<link rel="shortcut icon" href="image/logo.png">
 </head>
 <body>
 	<nav>
+		<img src="image/logo.png">
+
 		<a href="index.php"> Home </a>
 
 
@@ -22,8 +24,11 @@
 					?>
 						<a href="jeux.php"> jeux </a>
 						<a href="planning.php"> planning </a>
-						<a href="profil.php">Profil</a> / 
-						<a href="code/deconnection.php">deconnection</a>
+						<div class="profil">
+							<a href="profil.php">Profil</a> / 
+							<a href="code/deconnection.php">deconnection</a>
+						</div>
+							
 					<?php  
 				}
 				elseif($_SESSION['role'] == "1")
@@ -32,8 +37,11 @@
 						<a href="jeux.php"> jeux </a>
 						<a href="planning.php"> planning </a>
 						<a href="admin.php"> admin </a>
-						<a href="profil.php">Profil</a> / 
-						<a href="code/deconnection.php">deconnection</a>
+						<div class="profil">
+							<a href="profil.php">Profil</a> / 
+							<a href="code/deconnection.php">deconnection</a>
+						</div>
+						
 					<?php 
 				}
 				
@@ -42,13 +50,13 @@
 			else
 			{
 				?>
-				<a href="connection.php"> Connection </a> / 
-				<a href="inscription.php"> Inscription </a>
+				<div class="profil">
+					<a href="connection.php"> Connection </a> / 
+					<a href="inscription.php"> Inscription </a>
+				</div>
+				
 				<?php  
 			}
 		?>
-		
-		
-
 	</nav>
 
