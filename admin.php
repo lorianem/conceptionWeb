@@ -88,9 +88,8 @@ if (isset($_POST['subAjoutEvent']))
 	if ( !empty($idJeu) && !empty($difficulte) && !empty($date) &&  !empty($duree) && !empty($nbPlace) )
 
 	{    
-		echo "1";
 		$requete = $bdd -> prepare("INSERT INTO planning(id_jeux, places, dateDebut, niveau, duree) VALUES (?,?,?,?,?)");
-		$requete -> execute(array($idJeu, $nbPlace, $date, $duree, $nbPlace));
+		$requete -> execute(array($idJeu, $nbPlace, $date,$difficulte, $duree));
 	}
 }
 ?>
@@ -123,8 +122,15 @@ if (isset($_POST['subSuppEvent']))
 	$idEvent = $_POST["eventSelect"];
 	if(!empty($idEvent))
 	{
-
-		$requete = $bdd -> prepare("DELETE FROM planning WHERE id = ?");
+		$reqMes= $bdd->prepare("SELECT * FROM inscription WHERE id_planning = ?");
+		$reqMes->execute(array($idEvent));
+		while($resultMess = $reqMes -> fetch())
+		{
+			$messageAnnulation = "Bonjour \n Nous sommes désolé de vous annoncer que la séance de jeux auquel vous étiez inscrit vient d'être annuler. \n Vous nous prions de nous excuser\n\n Cordialement toutes l'équipe";
+			$messageSupp = $bdd->prepare("INSERT INTO message(id_users, objet, message) VALUES (?, 'Annulation evenement auquel vous étiez inscrit', ?)");
+			$messageSupp->execute(array($resultMess["id_users"], $messageAnnulation));
+		}
+		$requete = $bdd -> prepare("DELETE FROM planning WHERE id = ?"); // Table en delete cascade donc les lignes dans inscription sont aussi supprimé !
 		$requete -> execute(array($idEvent));
 	}
 	
@@ -152,7 +158,7 @@ if (isset($_POST['subSuppEvent']))
 		</div>
 		<div><label>Règle de jeu : </label><input type="file" name="regle_jeu"> </div>
 		<div><label>Image : </label><input type="file" name="image_jeu"> </div>
-		<p><?php echo '<font color="red">'.$msgAjoutJeu."</font>"; ?></p><br>
+		<p><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutJeu."</font>"; } ?></p><br>
 
 		<div><label>Ajouter : </label><input id="subAjoutJeu" type="submit" name="subAjoutJeu"> </div>
 	</form>		
@@ -163,8 +169,10 @@ if (isset($_POST['subSuppEvent']))
 <section id="ajoutCategorie">
 	<h2>Ajout d'une catégorie de jeu </h2>
 	<form method="POST" enctype="multipart/form-data">
-		<div><label>Nom catégorie : </label><input type="text" id="" name="nom_categorie"> </div><br>
+		<div><label>Nom catégorie : </label><input type="text" id="" name="nom_categorie"> </div>
+		<p><?php if(isset($msgAjoutCat)) {  echo '<font color="red">'.$msgAjoutCat."</font>"; } ?></p><br>
 		<div><label>Ajouter : </label><input id="subAjoutCategorie" value="Ajouter" type="submit" name="subAjoutCategorie"> </div>
+
 	</form>
 </section><br>
 
@@ -197,10 +205,12 @@ if (isset($_POST['subSuppEvent']))
 				<option value="Maitre">Maitre</option>
 			</select>
 		</div>
-		<div><label>Date évènement : </label><input name="dateEvent" type="date" > </div>
+		<div><label>Date évènement : </label><input name="dateEvent" type="datetime-local" > </div>
 		<div><label>Temps de jeu : </label><input type="number" name="dureeEvent"> </div>
 		<div><label>Nombre de place : </label><input type="number" name="nbPlace"> </div>
-		<p><?php echo '<font color="red">'.$msgAjoutEvent."</font>"; ?></p><br>
+		<p>
+			<?php if(isset($msgAjoutEvent)) {  echo '<font color="red">'.$msgAjoutEvent."</font>"; } ?>
+		</p><br>
 		<div><label>Ajouter : </label><input id="subAjoutEvent" value="Ajouter" type="submit" name="subAjoutEvent"> </div>
 	</form>
 </section><br>
@@ -216,9 +226,9 @@ if (isset($_POST['subSuppEvent']))
 					    $requetes->execute();
 						while($resultat =  $requetes->fetch())
 						{
-							$reqJeu = $bdd->prepare("SELECT * FROM jeux"); 
-					    	$reqJeu->execute(array($resultat['id']));
-					   		 $resulJeu =  $reqJeu->fetch();
+							$reqJeu = $bdd->prepare("SELECT * FROM jeux WHERE id=?"); 
+					    	$reqJeu->execute(array($resultat['id_jeux']));
+					   		$resulJeu =  $reqJeu->fetch();
 							?>
 
 							<option value="<?= $resultat['id'] ?>" >   <?= $resulJeu['nom'] ?>, date :   <?= $resultat['dateDebut'] ?> </option>
@@ -226,7 +236,10 @@ if (isset($_POST['subSuppEvent']))
 					?>
 				</select>
 		</div>
-		<p><?php echo '<font color="red">'.$msgSuppEvent."</font>"; ?></p><br>
+		<p>
+			<?php if(isset($msgSuppEvent)) { echo '<font color="red">'.$msgSuppEvent."</font>";  } ?>
+			
+		</p><br>
 		<div><label>Supprimer : </label><input id="subSuppEvent" value="Supprimer" type="submit" name="subSuppEvent"> </div>
 	</form>
 </section><br>
@@ -237,7 +250,7 @@ if (isset($_POST['subSuppEvent']))
 		<h2>Ajout d'un administrateur</h2>
 		<div><label>Pseudo du nouvel admin : </label><input type="text" id="pseudoAjoutAdmin" name="pseudoAjoutAdmin"> </div>
 		<div><label>Ajouter : </label><input id="subAjoutAdmin" value="Ajouter" type="submit" name="subAjoutAdmin"> </div>
-		<p><?php echo '<font color="red">'.$msgAjoutAdmin."</font>"; ?></p><br>
+		<p><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutAdmin."</font>"; } ?></p><br>
 	</form>
 </section>
 
