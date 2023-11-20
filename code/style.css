@@ -8,10 +8,12 @@ body
 nav
 {
 	padding : 20px;
-	background: #F2F2F2;
+	background: #afafaf;
 
 	font-size : 1.1em;
 	font-weight: bold;
+
+	box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.4);
 }
 
 nav img
@@ -30,6 +32,7 @@ nav a
 nav .profil
 {
 	display: inline-block;
+
 
 }
 
@@ -71,6 +74,14 @@ footer
 	 background: #F2F2F2;
 }
 
+section
+{
+	background: #F2F2F2;
+	margin: 15px;
+	padding: 10px;
+	border-radius: 10px;
+
+}
 
 
 

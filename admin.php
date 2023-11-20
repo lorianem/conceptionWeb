@@ -151,7 +151,9 @@ if (isset($_POST['subSuppEvent']))
 				</select>
 		</div>
 		<div><label>Règle de jeu : </label><input type="file" name="regle_jeu"> </div>
-		<div><label>Image : </label><input type="file" name="image_jeu"> </div><br>
+		<div><label>Image : </label><input type="file" name="image_jeu"> </div>
+		<p><?php echo '<font color="red">'.$msgAjoutJeu."</font>"; ?></p><br>
+
 		<div><label>Ajouter : </label><input id="subAjoutJeu" type="submit" name="subAjoutJeu"> </div>
 	</form>		
 </section><br>
@@ -161,7 +163,7 @@ if (isset($_POST['subSuppEvent']))
 <section id="ajoutCategorie">
 	<h2>Ajout d'une catégorie de jeu </h2>
 	<form method="POST" enctype="multipart/form-data">
-		<div><label>Nom catégorie</label><input type="text" id="" name="nom_categorie"> </div><br>
+		<div><label>Nom catégorie : </label><input type="text" id="" name="nom_categorie"> </div><br>
 		<div><label>Ajouter : </label><input id="subAjoutCategorie" value="Ajouter" type="submit" name="subAjoutCategorie"> </div>
 	</form>
 </section><br>
@@ -197,7 +199,8 @@ if (isset($_POST['subSuppEvent']))
 		</div>
 		<div><label>Date évènement : </label><input name="dateEvent" type="date" > </div>
 		<div><label>Temps de jeu : </label><input type="number" name="dureeEvent"> </div>
-		<div><label>Nombre de place : </label><input type="number" name="nbPlace"> </div><br>
+		<div><label>Nombre de place : </label><input type="number" name="nbPlace"> </div>
+		<p><?php echo '<font color="red">'.$msgAjoutEvent."</font>"; ?></p><br>
 		<div><label>Ajouter : </label><input id="subAjoutEvent" value="Ajouter" type="submit" name="subAjoutEvent"> </div>
 	</form>
 </section><br>
@@ -223,6 +226,7 @@ if (isset($_POST['subSuppEvent']))
 					?>
 				</select>
 		</div>
+		<p><?php echo '<font color="red">'.$msgSuppEvent."</font>"; ?></p><br>
 		<div><label>Supprimer : </label><input id="subSuppEvent" value="Supprimer" type="submit" name="subSuppEvent"> </div>
 	</form>
 </section><br>
@@ -233,6 +237,7 @@ if (isset($_POST['subSuppEvent']))
 		<h2>Ajout d'un administrateur</h2>
 		<div><label>Pseudo du nouvel admin : </label><input type="text" id="pseudoAjoutAdmin" name="pseudoAjoutAdmin"> </div>
 		<div><label>Ajouter : </label><input id="subAjoutAdmin" value="Ajouter" type="submit" name="subAjoutAdmin"> </div>
+		<p><?php echo '<font color="red">'.$msgAjoutAdmin."</font>"; ?></p><br>
 	</form>
 </section>
 
