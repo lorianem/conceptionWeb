@@ -130,7 +130,7 @@ if (isset($_POST['subSuppEvent']))
 			$messageSupp = $bdd->prepare("INSERT INTO message(id_users, objet, message) VALUES (?, 'Annulation evenement auquel vous étiez inscrit', ?)");
 			$messageSupp->execute(array($resultMess["id_users"], $messageAnnulation));
 		}
-		$requete = $bdd -> prepare("DELETE FROM planning WHERE id = ?"); // Table en delete cascade donc les lignes dans inscription sont aussi supprimé !
+		$requete = $bdd -> prepare("DELETE FROM planning WHERE id = ?"); // Table en delete cascade donc les lignes dans inscription sont aussi supprimée
 		$requete -> execute(array($idEvent));
 	}
 	
@@ -139,7 +139,7 @@ if (isset($_POST['subSuppEvent']))
 ?>
 
 
-<section id="ajoutJeu" align="center" >
+<section id="ajoutJeu" align="center">
 	<h2>Ajout d'un nouveau jeu</h2>
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Nom : </label><input type="text" id="nom_jeu" name="nom_jeu"> </div>
@@ -165,8 +165,32 @@ if (isset($_POST['subSuppEvent']))
 </section><br>
 
 
+<section id="modifJeu" align="center">
+	<h2>Modification jeu</h2>
+	<form method="POST" enctype="multipart/form-data">
+	<div><label>Jeu : </label>
+					<select id="jeuSelect" name="jeuSelect">
+						<?php 
+							$requetes = $bdd->prepare("SELECT * FROM jeux"); 
+						    $requetes->execute();
+							while($resultat =  $requetes->fetch())
+							{?>
+								<option value="<?= $resultat['id'] ?>" ><?= $resultat['nom'] ?> </option>
+							<?php  }
+						?>
+					</select>
+			</div>
 
-<section id="ajoutCategorie" align="center" >
+		<div><label>Modification description : </label><input type="text" name="description"> </div>
+		<div><label>Modification des règles de jeu : </label><input type="file" name="regle_jeu"> </div>
+		<div><label>mage : </label><input type="file" name="image_jeu"> </div>
+		<p><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutJeu."</font>"; } ?></p><br>
+
+		<div><label>Ajouter : </label><input id="subModifJeu" type="submit" name="subModifJeu"> </div>
+	</form>		
+</section><br>
+
+<section id="ajoutCategorie" align="center"> 
 	<h2>Ajout d'une catégorie de jeu </h2>
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Nom catégorie : </label><input type="text" id="" name="nom_categorie"> </div>
@@ -178,7 +202,7 @@ if (isset($_POST['subSuppEvent']))
 
 
 
-<section id="ajoutEvent" align="center" >
+<section id="ajoutEvent" align="center">
 	<h2>Ajout d'un évènement </h2>
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Jeu : </label>
@@ -216,7 +240,7 @@ if (isset($_POST['subSuppEvent']))
 </section><br>
 
 
-<section id="suppressionEvent" align="center" >
+<section id="suppressionEvent" align="center">
 	<h2>Suppression évènement </h2>
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Catégorie : </label>
@@ -245,7 +269,7 @@ if (isset($_POST['subSuppEvent']))
 </section><br>
 
 
-<section id="ajoutAdmin" align="center" >
+<section id="ajoutAdmin" align="center">
 	<form method="POST" enctype="multipart/form-data">
 		<h2>Ajout d'un administrateur</h2>
 		<div><label>Pseudo du nouvel admin : </label><input type="text" id="pseudoAjoutAdmin" name="pseudoAjoutAdmin"> </div>
