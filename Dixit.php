@@ -32,6 +32,11 @@
             entre la clarté et la subtilité pour marquer des points. Dixit favorise la créativité, l'imagination et la compréhension intuitive 
             entre les joueurs. </p>
             <a id="nav2" href="document/regle/Dixit.pdf"> Règles du jeu </a>
+            </br>
+            </br>
+                <div class="d-grid gap-2 col-2 mx-auto">
+                    <button type="button" class="btn btn-warning">Rejoindre la partie</button>
+                </div>
         </section>
     </main>
 

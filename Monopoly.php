@@ -32,6 +32,11 @@
                     Le jeu inclut également des cartes "Chance" et "Caisse de communauté", ainsi que des impôts et d'autres obstacles financiers. Le Monopoly est célèbre 
                     pour ses négociations tendues, ses revirements de fortune et sa stratégie économique, offrant une expérience ludique empreinte de compétition et de ruse. </p>
                 <a id="nav2" href="document/regle/Monopoly.pdf"> Règles du jeu </a>
+                </br>
+                </br>
+                <div class="d-grid gap-2 col-2 mx-auto">
+                    <button type="button" class="btn btn-warning">Rejoindre la partie</button>
+                </div>
             </section>
         </main>
     </body>

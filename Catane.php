@@ -33,6 +33,11 @@
             de "Catane" un jeu captivant axé sur la gestion de ressources et la diplomatie, avec pour objectif de devenir 
             la puissance dominante sur l'île.  </p>
             <a id="nav2" href="image/jeux/Catane.jpg"> Règles du jeu </a>
+            </br>
+            </br>
+                <div class="d-grid gap-2 col-2 mx-auto">
+                    <button type="button" class="btn btn-warning">Rejoindre la partie</button>
+                </div>
         </section>
     </main>
 

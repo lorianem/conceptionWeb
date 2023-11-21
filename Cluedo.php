@@ -33,6 +33,11 @@
             "Cluedo" combine habilement la stratégie, la logique et l'interaction sociale, créant une expérience immersive 
             de résolution de mystère. </p>
             <a id="nav2" href="document/regle/Cluedo.pdf"> Règles du jeu </a>
+            </br>
+            </br>
+                <div class="d-grid gap-2 col-2 mx-auto">
+                    <button type="button" class="btn btn-warning">Rejoindre la partie</button>
+                </div>
         </section>
     </main>
 

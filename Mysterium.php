@@ -32,6 +32,11 @@
             interpréter ces images pour identifier le coupable, l'arme et le lieu du crime. "Mysterium" offre une expérience unique 
             mêlant déduction, collaboration et une ambiance envoûtante, où les joueurs explorent le paranormal pour résoudre le crime. </p>
             <a id="nav2" href="document/regle/Mysterium.pdf"> Règles du jeu </a>
+            </br>
+            </br>
+                <div class="d-grid gap-2 col-2 mx-auto">
+                    <button type="button" class="btn btn-warning">Rejoindre la partie</button>
+                </div>
         </section>
     </main>
 

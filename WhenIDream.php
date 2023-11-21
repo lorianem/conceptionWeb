@@ -33,6 +33,11 @@
             de manière positive ou négative. Le jeu explore la créativité, la communication et la perception, offrant une expérience ludique et immersive 
             centrée sur l'interprétation des rêves. </p>
             <a id="nav2" href="document/regle/When I Dream.pdf"> Règles du jeu </a>
+            </br>
+            </br>
+                <div class="d-grid gap-2 col-2 mx-auto">
+                    <button type="button" class="btn btn-warning">Rejoindre la partie</button>
+                </div>
         </section>
     </main>
 
