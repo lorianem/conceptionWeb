@@ -6,8 +6,8 @@
 <h1 align="center"> PROFIL </h1>
 
 <section>
-	<h2 align="center">Planning</h2>
-	<table id="planning" align="center" >
+	<h2 align="center">Les plannings</h2><br>
+	<table id="planning" align="center" class="table table-striped" >
 		<thead>
 	    <tr>
 	      <th colspan="5">Mon planning</th>
@@ -15,7 +15,7 @@
 	    <tr>
 	    	<td align="center">Jeux</td>
 	    	<td align="center">Date</td>
-	    	<td align="center" >Temps (H)</td>
+	    	<td align="center" >Temps</td>
 	    	<td align="center">Niveau</td>
 	    	<td align="center">Inscription</td>
 	    </tr>
@@ -38,7 +38,7 @@
 		?>
 				<td align="center">  <?= $jeu['nom'] ?>  </td>
 				<td align="center">  <?= $event['dateDebut'] ?>  </td>
-				<td align="center">  <?= $event['duree'] ?>  </td>
+				<td align="center">  <?= $event['duree'] ?> heures </td>
 				<td align="center">  <?= $event['niveau'] ?>  </td>
 				<td align="center">  desinscription  </td>
 			<?php }
@@ -47,10 +47,8 @@
 
 
 	</table>
-</section>
-<section>
-	<h2 align="center">Historique des évènements</h2>
-	<table id="planning" align="center" >
+
+	<table id="planning" align="center" class="table table-striped">
 		<thead>
 	    <tr>
 	      <th colspan="5">Mon Historique</th>
@@ -81,7 +79,7 @@
 		?>
 				<td align="center">  <?= $jeu['nom'] ?>  </td>
 				<td align="center">  <?= $event['dateDebut'] ?>  </td>
-				<td align="center">  <?= $event['duree'] ?>  </td>
+				<td align="center">  <?= $event['duree'] ?> heures </td>
 				<td align="center">  <?= $event['niveau'] ?>  </td>
 
 			<?php }

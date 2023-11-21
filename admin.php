@@ -138,14 +138,17 @@ if (isset($_POST['subSuppEvent']))
 
 ?>
 
+<?php
 
-<section id="ajoutJeu" align="center">
-	<h2>Ajout d'un nouveau jeu</h2>
+?>
+
+<section id="ajoutJeu" >
+	<h2>Ajout d'un nouveau jeu</h2><br>
 	<form method="POST" enctype="multipart/form-data">
-		<div><label>Nom : </label><input type="text" id="nom_jeu" name="nom_jeu"> </div>
-		<div><label>Description : </label><input type="text" name="description"> </div>
-		<div><label>Catégorie : </label>
-				<select id="cat_select" name="cat_select">
+		<div class="mb-3" ><label class="form-label">Nom : </label><input type="text" id="nom_jeu" name="nom_jeu" class="form-control"> </div>
+		<div class="mb-3"><label class="form-label">Description : </label><input type="text" name="description" class="form-control"> </div>
+		<div class="mb-3"><label class="form-label">Catégorie : </label>
+				<select id="cat_select" name="cat_select" class="form-control">
 					<?php 
 						$requetes = $bdd->prepare("SELECT * FROM categorie"); 
 					    $requetes->execute();
@@ -156,20 +159,20 @@ if (isset($_POST['subSuppEvent']))
 					?>
 				</select>
 		</div>
-		<div><label>Règle de jeu : </label><input type="file" name="regle_jeu"> </div>
-		<div><label>Image : </label><input type="file" name="image_jeu"> </div>
-		<p><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutJeu."</font>"; } ?></p><br>
+		<div class="mb-3"><label class="form-label">Règle de jeu : </label><input type="file" name="regle_jeu" class="form-control"> </div>
+		<div class="mb-3"> <label class="form-label">Image : </label><input type="file" name="image_jeu" class="form-control"> </div>
+		<p class="error"><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutJeu."</font>"; } ?></p><br>
 
-		<div><label>Ajouter : </label><input id="subAjoutJeu" type="submit" name="subAjoutJeu"> </div>
+		<div class="mb-3"><input class="btn btn-primary" id="subAjoutJeu" type="submit" name="subAjoutJeu" value="Ajouter"> </div>
 	</form>		
 </section><br>
 
 
-<section id="modifJeu" align="center">
+<section id="modifJeu" >
 	<h2>Modification jeu</h2>
 	<form method="POST" enctype="multipart/form-data">
-	<div><label>Jeu : </label>
-					<select id="jeuSelect" name="jeuSelect">
+	<div class="mb-3"><label class="form-label">Jeu : </label>
+					<select class="form-control"  id="jeuSelect" name="jeuSelect">
 						<?php 
 							$requetes = $bdd->prepare("SELECT * FROM jeux"); 
 						    $requetes->execute();
@@ -181,33 +184,46 @@ if (isset($_POST['subSuppEvent']))
 					</select>
 			</div>
 
-		<div><label>Modification description : </label><input type="text" name="description"> </div>
-		<div><label>Modification des règles de jeu : </label><input type="file" name="regle_jeu"> </div>
-		<div><label>mage : </label><input type="file" name="image_jeu"> </div>
-		<p><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutJeu."</font>"; } ?></p><br>
+		<div class="mb-3">
+			<label class="form-label">Modification description : </label>
+			<input class="form-control" type="text" name="description"> 
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Modification des règles de jeu : </label>
+			<input class="form-control" type="file" name="regle_jeu"> 
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Image : </label>
+			<input class="form-control" type="file" name="image_jeu"> 
+		</div>
 
-		<div><label>Ajouter : </label><input id="subModifJeu" type="submit" name="subModifJeu"> </div>
+		<p class="error"><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutJeu."</font>"; } ?></p><br>
+
+		<div><input class="btn btn-primary" id="subModifJeu" type="submit" name="subModifJeu"> </div>
 	</form>		
 </section><br>
 
-<section id="ajoutCategorie" align="center"> 
+<section id="ajoutCategorie" > 
 	<h2>Ajout d'une catégorie de jeu </h2>
 	<form method="POST" enctype="multipart/form-data">
-		<div><label>Nom catégorie : </label><input type="text" id="" name="nom_categorie"> </div>
-		<p><?php if(isset($msgAjoutCat)) {  echo '<font color="red">'.$msgAjoutCat."</font>"; } ?></p><br>
-		<div><label>Ajouter : </label><input id="subAjoutCategorie" value="Ajouter" type="submit" name="subAjoutCategorie"> </div>
+		<div class="mb-3">
+			<label class="form-label">Nom catégorie : </label >
+			<input class="form-control" type="text" id="" name="nom_categorie">
+		</div>
+		<p class="error"><?php if(isset($msgAjoutCat)) {  echo '<font color="red">'.$msgAjoutCat."</font>"; } ?></p><br>
+		<div class="mb-3"><input class="btn btn-primary" id="subAjoutCategorie" value="Ajouter" type="submit" name="subAjoutCategorie"> </div>
 
 	</form>
 </section><br>
 
 
 
-<section id="ajoutEvent" align="center">
+<section id="ajoutEvent" >
 	<h2>Ajout d'un évènement </h2>
 	<form method="POST" enctype="multipart/form-data">
-		<div><label>Jeu : </label>
+		<div class="mb-3"><label class="form-label">Jeu : </label>
 
-				<select id="jeuSelect" name="jeuSelect">
+				<select class="form-control" id="jeuSelect" name="jeuSelect">
 					<?php 
 						$requetes = $bdd->prepare("SELECT * FROM jeux"); 
 					    $requetes->execute();
@@ -218,9 +234,9 @@ if (isset($_POST['subSuppEvent']))
 					?>
 				</select>
 		</div>
-		<div>
-			<label>Difficulté : </label>
-			<select id="difSelect" name="difSelect">
+		<div class="mb-3">
+			<label class="form-label">Difficulté : </label>
+			<select class="form-control" id="difSelect" name="difSelect">
 				<option value="Tous">Tous</option>
 				<option value="Neophyte">Néophyte</option>
 				<option value="Debutant">Débutant</option>
@@ -229,22 +245,31 @@ if (isset($_POST['subSuppEvent']))
 				<option value="Maitre">Maitre</option>
 			</select>
 		</div>
-		<div><label>Date évènement : </label><input name="dateEvent" type="datetime-local" > </div>
-		<div><label>Temps de jeu : </label><input type="number" name="dureeEvent"> </div>
-		<div><label>Nombre de place : </label><input type="number" name="nbPlace"> </div>
-		<p>
+		<div class="mb-3">
+			<label class="form-label">Date évènement : </label>
+			<input name="dateEvent" class="form-control" type="datetime-local" > 
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Temps de jeu : </label>
+			<input type="number" name="dureeEvent" class="form-control"> 
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Nombre de place : </label>
+			<input type="number" name="nbPlace" class="form-control">
+		</div>
+		<p class="error">
 			<?php if(isset($msgAjoutEvent)) {  echo '<font color="red">'.$msgAjoutEvent."</font>"; } ?>
 		</p><br>
-		<div><label>Ajouter : </label><input id="subAjoutEvent" value="Ajouter" type="submit" name="subAjoutEvent"> </div>
+		<div class="mb-3"><input class="btn btn-primary" id="subAjoutEvent" value="Ajouter" type="submit" name="subAjoutEvent"> </div>
 	</form>
 </section><br>
 
 
-<section id="suppressionEvent" align="center">
+<section id="suppressionEvent" >
 	<h2>Suppression évènement </h2>
 	<form method="POST" enctype="multipart/form-data">
-		<div><label>Catégorie : </label>
-				<select id="eventSelect" name="eventSelect">
+		<div class="mb-3"> <label class="form-label">Catégorie : </label>
+				<select class="form-control" id="eventSelect" name="eventSelect">
 					<?php 
 						$requetes = $bdd->prepare("SELECT * FROM planning"); 
 					    $requetes->execute();
@@ -260,21 +285,23 @@ if (isset($_POST['subSuppEvent']))
 					?>
 				</select>
 		</div>
-		<p>
-			<?php if(isset($msgSuppEvent)) { echo '<font color="red">'.$msgSuppEvent."</font>";  } ?>
-			
-		</p><br>
-		<div><label>Supprimer : </label><input id="subSuppEvent" value="Supprimer" type="submit" name="subSuppEvent"> </div>
+		<p class="error"><?php if(isset($msgSuppEvent)) { echo '<font color="red">'.$msgSuppEvent."</font>";  } ?></p><br>
+
+		<div class="mb-3"><input class="btn btn-primary" id="subSuppEvent" value="Supprimer" type="submit" name="subSuppEvent"> </div>
 	</form>
 </section><br>
 
 
-<section id="ajoutAdmin" align="center">
+<section id="ajoutAdmin" >
 	<form method="POST" enctype="multipart/form-data">
 		<h2>Ajout d'un administrateur</h2>
-		<div><label>Pseudo du nouvel admin : </label><input type="text" id="pseudoAjoutAdmin" name="pseudoAjoutAdmin"> </div>
-		<div><label>Ajouter : </label><input id="subAjoutAdmin" value="Ajouter" type="submit" name="subAjoutAdmin"> </div>
-		<p><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutAdmin."</font>"; } ?></p><br>
+		<div class="mb-3">
+			<label class="form-label">Pseudo du nouvel admin : </label>
+			<input class="form-control"type="text" id="pseudoAjoutAdmin" name="pseudoAjoutAdmin">
+		</div>
+		<p class="error"><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutAdmin."</font>"; } ?></p><br>
+		<div class="mb-3"> <input class="btn btn-primary" id="subAjoutAdmin" value="Ajouter" type="submit" name="subAjoutAdmin"> </div>
+		
 	</form>
 </section>
 

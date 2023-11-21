@@ -12,53 +12,89 @@
 </head>
 <body>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-	<nav>
-		<img src="image/logo.png">
-
-		<a id="nav1" href="home.php"> Home </a>
+	
 
 
-		<?php
-			if(isset($_SESSION) && !empty($_SESSION))
-			{
-				if(($_SESSION['role'] == "0"))	
-				{
-					?>
-						<a id="nav2" href="jeux.php"> jeux </a>
-						<a id="nav3" href="planning.php"> planning </a>
-						<div class="profil">
-							<a id="nav5" href="profil.php">Profil</a> 
-							<a id="nav6" href="code/deconnection.php">deconnection</a>
-						</div>
-							
-					<?php  
-				}
-				elseif($_SESSION['role'] == "1")
-				{
-					?>
-						<a id="nav2" href="jeux.php"> jeux </a>
-						<a id="nav3" href="planning.php"> planning </a>
-						<a id="nav4" href="admin.php"> admin </a>
-						<div class="profil">
-							<a id="nav5"  href="profil.php">Profil</a> 
-							<a id="nav6"  href="code/deconnection.php">deconnection</a>
-						</div>
-						
-					<?php 
-				}
-				
 
-			}
-			else
-			{
-				?>
-				<div class="profil">
-					<a id="nav5" href="connection.php"> Connection </a> 
-					<a id="nav6" href="inscription.php"> Inscription </a>
+	<nav class="navbar navbar-dark bg-dark fixed-top">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="index.php">LUKIDO</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+				<span class="navbar-toggler-icon"></span>
+	    	</button>
+
+	    	<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+	    		<div class="offcanvas-header">
+						<h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu de navigation</h5>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 				</div>
-				
-				<?php  
-			}
-		?>
-	</nav>
+			<div class="offcanvas-body">
+			<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          		<li class="nav-item">
+					<a class="nav-link" id="nav1"  href="index.php"> Home </a>
+				</li>
+				<?php
+					if(isset($_SESSION) && !empty($_SESSION))
+					{
+						if(($_SESSION['role'] == "0"))	
+						{
+							?>
+								<li class="nav-item">
+									<a class="nav-link" id="nav2" href="jeux.php"> jeux </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="nav3" href="planning.php"> planning </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="nav5" href="profil.php">Profil</a> 
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="nav6" href="code/deconnection.php">deconnection</a>
+								</li>
+		s
+									
+							<?php  
+						}
+						elseif($_SESSION['role'] == "1")
+						{
+							?>
+								<li class="nav-item">
+									<a class="nav-link" id="nav2" href="jeux.php"> jeux </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="nav3" href="planning.php"> planning </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="nav4" href="admin.php"> admin </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="nav5" href="profil.php">Profil</a> 
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="nav6" href="code/deconnection.php">deconnection</a>
+								</li>
+
+								
+							<?php 
+						}
+						
+
+					}
+					else
+					{
+						?>
+						<li class="nav-item">
+							<a id="nav5" class="nav-link" href="connection.php"> Connection </a> 
+						</li>
+						<li class="nav-item">
+							<a id="nav6" class="nav-link" href="inscription.php"> Inscription </a>
+						</li>						
+						<?php  
+					}
+				?>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</nav> </br></br></br>
 
