@@ -205,4 +205,4 @@ else
 	</main>
 
 
-<?php include("code/PiedPage.h") ?>
+<?php include("code/PiedPage.html") ?>
