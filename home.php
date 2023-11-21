@@ -32,6 +32,7 @@
     </style>
 </head>
 <body>
+    </br>
     <h1>HOME</h1>
         <style>
                 h1 {
