@@ -139,7 +139,7 @@ if (isset($_POST['subSuppEvent']))
 ?>
 
 
-<section id="ajoutJeu">
+<section id="ajoutJeu" align="center" >
 	<h2>Ajout d'un nouveau jeu</h2>
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Nom : </label><input type="text" id="nom_jeu" name="nom_jeu"> </div>
@@ -166,7 +166,7 @@ if (isset($_POST['subSuppEvent']))
 
 
 
-<section id="ajoutCategorie">
+<section id="ajoutCategorie" align="center" >
 	<h2>Ajout d'une catégorie de jeu </h2>
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Nom catégorie : </label><input type="text" id="" name="nom_categorie"> </div>
@@ -178,7 +178,7 @@ if (isset($_POST['subSuppEvent']))
 
 
 
-<section id="ajoutEvent">
+<section id="ajoutEvent" align="center" >
 	<h2>Ajout d'un évènement </h2>
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Jeu : </label>
@@ -216,7 +216,7 @@ if (isset($_POST['subSuppEvent']))
 </section><br>
 
 
-<section id="suppressionEvent">
+<section id="suppressionEvent" align="center" >
 	<h2>Suppression évènement </h2>
 	<form method="POST" enctype="multipart/form-data">
 		<div><label>Catégorie : </label>
@@ -245,7 +245,7 @@ if (isset($_POST['subSuppEvent']))
 </section><br>
 
 
-<section id="ajoutAdmin">
+<section id="ajoutAdmin" align="center" >
 	<form method="POST" enctype="multipart/form-data">
 		<h2>Ajout d'un administrateur</h2>
 		<div><label>Pseudo du nouvel admin : </label><input type="text" id="pseudoAjoutAdmin" name="pseudoAjoutAdmin"> </div>
