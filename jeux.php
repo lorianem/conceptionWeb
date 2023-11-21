@@ -11,39 +11,66 @@
     <link rel="stylesheet" href="style.css">
   </head>
 
-  <body>
-  <nav class="navbar navbar-expand-md bg-dark border-bottom border-body" data-bs-theme="dark">
-  <div class="container-fluid">
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="home.php">Accueil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="jeux.php">Jeux</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="planning.php">Planning</a>
-        </li>
-              </ul>
-      <ul class="navbar-nav mb-lg-0">
-
-        <li class="nav-item">
-          <img src="editer-le-profil.png" class="rounded mx-auto d-block" alt="Mon Profil">
-          <a class="nav-link"  href="profil.php">Profil</a>
-        </li>
-      </ul>
-
-    </div>
-  </div>
-</nav>
-
-<main>
-
-
 
   </body>
+  <body>
+    <br>
+    <h1>LISTE DES JEUX</h1>
+        <style>
+                h1 {
+                    display: flex;
+                    justify-content: center; /* Centre horizontalement */
+                    align-items: center; /* Centre verticalement */
+                    height: 10vh; /* Pour occuper la hauteur complète de la vue */
+                }
+
+                .center-text {
+                    text-align: center; /* Centre le texte à l'intérieur du conteneur */
+                }
+        </style>
+
+    <div class="flex-container" style="margin : 40px;">
+        <section class='center'>
+            <style>
+                .center{
+                    text-align: center;
+                }
+            </style>
+            <img src="image/jeux/Dixit.jpg" class="img-thumbnail" alt="Error"
+            width="350px"
+            height="80px">
+        </section>
+
+        <section>
+            <h5 style="center">Dixit</h5>
+            <p> Dixit est un jeu où les joueurs s'expriment par des cartes illustrées, inventent des histoires et essaient de deviner 
+                la carte du conteur. La créativité et l'intuition sont essentielles pour marquer des points. </p>
+        </section>
+    </div>
+
+
+    <div class="flex-container" style="margin : 40px;">
+        <section>
+            <h5 style="center">Monopoly</h5>
+            <p> Le Monopoly est un jeu où les joueurs achètent, échangent et construisent des propriétés pour accumuler des richesses. 
+                En lançant les dés, ils se déplacent autour du plateau, perçoivent des loyers et négocient pour devenir le magnat 
+                immobilier le plus prospère. Le jeu mêle stratégie financière, négociations et rebondissements inattendus. </p>
+        </section>
+
+        <section class='center'>
+            <style>
+                .center{
+                    text-align: center;
+                }
+            </style>
+            <img src="image/jeux/Monopoly.jpg" class="img-thumbnail" alt="Error"
+            width="350px"
+            height="80px">
+        </section>
+    </div>
+
+
+</body>
+</html>
+
 <html>

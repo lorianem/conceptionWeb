@@ -13,7 +13,7 @@
 	<nav>
 		<img src="image/logo.png">
 
-		<a id="nav1" href="index.php"> Home </a>
+		<a id="nav1" href="home.php"> Home </a>
 
 
 		<?php
