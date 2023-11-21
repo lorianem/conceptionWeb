@@ -1,15 +1,12 @@
 <?php include("code/EnTete.php") ?>
 <?php include("code/relocalisationVisiteur.php")?>
+<?php  $dateActuelle = date("Y-m-d H:i:s");?>
 
 
-
-
-
-<section>
-	<h1> PROFIL </h1>
+<h1 align="center"> PROFIL </h1>
 
 <section>
-	<h2>Planning</h2>
+	<h2 align="center">Planning</h2>
 	<table id="planning" align="center" >
 		<thead>
 	    <tr>
@@ -24,20 +21,20 @@
 	    </tr>
 		
 		<?php 
-			$reqPlanning = $bdd->prepare("SELECT * FROM inscription WHERE id_users = ?");
+			$reqPlanning = $bdd->prepare("SELECT * FROM inscription WHERE id_users = ? ");
 			$reqPlanning->execute(array($_SESSION["id"]));
 			while($inscription = $reqPlanning -> fetch())
 			{ ?>
 		<tr>
 		<?php  		
 
-			$reqEvent = $bdd -> prepare("SELECT * FROM planning WHERE id = ?");
-			$reqEvent->execute(array($inscription["id_planning"]));
+			$reqEvent = $bdd -> prepare("SELECT * FROM planning WHERE id = ? AND dateDebut > ?");
+			$reqEvent->execute(array($inscription["id_planning"], $dateActuelle));
 			while ($event = $reqEvent->fetch()) { 
 				$reqJeu = $bdd -> prepare("SELECT * FROM jeux WHERE id = ?");
 				$reqJeu->execute(array($event["id_jeux"]));
 				$jeu = $reqJeu->fetch();
-				echo $event["id_jeux"]
+
 		?>
 				<td align="center">  <?= $jeu['nom'] ?>  </td>
 				<td align="center">  <?= $event['dateDebut'] ?>  </td>
@@ -52,41 +49,41 @@
 	</table>
 </section>
 <section>
-	<h2>Historique des évènements</h2>
+	<h2 align="center">Historique des évènements</h2>
 	<table id="planning" align="center" >
 		<thead>
 	    <tr>
-	      <th colspan="5">Mon planning</th>
+	      <th colspan="5">Mon Historique</th>
 	    </tr>
 	    <tr>
 	    	<td align="center">Jeux</td>
 	    	<td align="center">Date</td>
 	    	<td align="center" >Temps (H)</td>
 	    	<td align="center">Niveau</td>
-	    	<td align="center">Inscription</td>
+
 	    </tr>
 		
 		<?php 
-			$reqPlanning = $bdd->prepare("SELECT * FROM inscription WHERE id_users = ?");
-			$reqPlanning->execute(array($_SESSION["id"]));
+			$reqPlanning = $bdd->prepare("SELECT * FROM inscription WHERE id_users = ? ");
+			$reqPlanning->execute(array($_SESSION["id"] ));
 			while($inscription = $reqPlanning -> fetch())
 			{ ?>
 		<tr>
 		<?php  		
 
-			$reqEvent = $bdd -> prepare("SELECT * FROM planning WHERE id = ?");
-			$reqEvent->execute(array($inscription["id_planning"]));
+			$reqEvent = $bdd -> prepare("SELECT * FROM planning WHERE id = ? AND dateDebut < ?");
+			$reqEvent->execute(array($inscription["id_planning"], $dateActuelle));
 			while ($event = $reqEvent->fetch()) { 
 				$reqJeu = $bdd -> prepare("SELECT * FROM jeux WHERE id = ?");
 				$reqJeu->execute(array($event["id_jeux"]));
 				$jeu = $reqJeu->fetch();
-				echo $event["id_jeux"]
+
 		?>
 				<td align="center">  <?= $jeu['nom'] ?>  </td>
 				<td align="center">  <?= $event['dateDebut'] ?>  </td>
 				<td align="center">  <?= $event['duree'] ?>  </td>
 				<td align="center">  <?= $event['niveau'] ?>  </td>
-				<td align="center">  desinscription  </td>
+
 			<?php }
 		}?>
 		</tr>
