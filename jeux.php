@@ -1,5 +1,6 @@
 <?php include("code/EnTete.php") ?>
 <?php include("code/relocalisationVisiteur.php")?>
+<?php include("code/systemeDeLike.php")?>
 
 <!doctype html>
 <html lang="fr">
@@ -9,6 +10,26 @@
     <title>Jeux</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+
+    <script>
+        $(document).ready(function() {
+            // Fonction pour changer la couleur du bouton
+            function changerCouleur() {
+                // Utilisation de jQuery pour envoyer une requête AJAX au serveur
+                $.ajax({
+                    url: 'changer_couleur.php',
+                    type: 'POST',
+                    success: function(response) {
+                        // Mettre à jour la couleur du bouton avec la couleur renvoyée par le serveur
+                        $('#button').css('background-color', response);
+                    }
+                });
+            }
+
+            // Associer la fonction au clic du bouton
+            $('#button').on('click', changerCouleur);
+        });
+    </script>
 
   </head>
 
@@ -45,7 +66,24 @@
 
       <section>
         
+      <div class="button-container">
         <a id="nav2" href="Dixit.php"> Dixit </a>
+        <button class="heart-button" href="code/systemeDeLike.php?etat=favories&id<?= $id ?>">&#10084</button>
+        <style>
+        /* Style pour aligner les boutons côte à côte */
+        .button-container {
+            display: flex;
+            gap: 5px; /* Espacement entre les boutons */
+        }
+        .heart-button {
+            color: #fff; /* Couleur du texte */
+            border: none;
+            /*padding: 10px 15px;  Ajustez selon la taille souhaitée */
+            border-radius: 50%; /* Pour créer la forme de cœur */
+            cursor: pointer;
+        }
+      </style>
+      </div>
               <?php
               
 
@@ -73,7 +111,27 @@
         </section>
 
         <section>
-            <a id="nav2" href="Monopoly.php"> Monopoly </a>
+
+        <div>
+          <a id="nav2" href="Monopoly.php"> Monopoly </a>
+          <button class="heart-button">&#10084</button>
+          <style>
+          /* Style pour aligner les boutons côte à côte */
+          .button-container {
+              display: flex;
+              gap: 5px; /* Espacement entre les boutons */
+          }
+          .heart-button {
+              color: #fff; /* Couleur du texte */
+              border: none;
+              /*padding: 10px 15px;  Ajustez selon la taille souhaitée */
+              border-radius: 50%; /* Pour créer la forme de cœur */
+              cursor: pointer;
+          }
+        </style>
+
+        </div>
+
             <p> Le Monopoly est un jeu de société emblématique qui met les joueurs dans la peau de magnats immobiliers. L'objectif est d'acheter, 
                 vendre et échanger des propriétés pour construire un empire financier. Les joueurs se déplacent autour du plateau en lançant les dés, 
                 acquièrent des propriétés, construisent des maisons et des hôtels, et chargent des loyers aux adversaires qui atterrissent sur leurs terrains. 
@@ -95,7 +153,27 @@
         </section>
 
         <section>
+
+          <div>
           <a id="nav2" href="Catane.php"> Catane </a>
+          <button class="heart-button">&#10084</button>
+        <style>
+        /* Style pour aligner les boutons côte à côte */
+        .button-container {
+            display: flex;
+            gap: 5px; /* Espacement entre les boutons */
+        }
+        .heart-button {
+            color: #fff; /* Couleur du texte */
+            border: none;
+            /*padding: 10px 15px;  Ajustez selon la taille souhaitée */
+            border-radius: 50%; /* Pour créer la forme de cœur */
+            cursor: pointer;
+        }
+      </style>
+
+          </div>
+
           <p> "Catane" est un jeu de société stratégique qui transporte les joueurs sur une île fictive appelée Catan. 
             Les participants y colonisent, échangent des ressources et construisent des routes et des colonies pour 
             étendre leur influence. La compétition pour les ressources clés, combinée à des négociations habiles, fait 
@@ -117,7 +195,27 @@
         </section>
 
         <section>
+
+          <div>
           <a id="nav2" href="Cluedo.php"> Cluedo </a>
+          <button class="heart-button">&#10084</button>
+        <style>
+        /* Style pour aligner les boutons côte à côte */
+        .button-container {
+            display: flex;
+            gap: 5px; /* Espacement entre les boutons */
+        }
+        .heart-button {
+            color: #fff; /* Couleur du texte */
+            border: none;
+            /*padding: 10px 15px;  Ajustez selon la taille souhaitée */
+            border-radius: 50%; /* Pour créer la forme de cœur */
+            cursor: pointer;
+        }
+      </style>
+
+          </div>
+
           <p> Jeu de société de déduction et d'enquête. Les joueurs incarnent des détectives essayant de résoudre 
             un meurtre mystérieux dans un manoir. En collectant des indices, posant des questions et éliminant 
             des suspects, les joueurs cherchent à découvrir qui a commis le meurtre, avec quelle arme et dans quelle pièce. 
@@ -139,7 +237,27 @@
         </section>
 
         <section>
+
+          <div>
           <a id="nav2" href="Mysterium.php"> Mysterium </a>
+          <button class="heart-button">&#10084</button>
+        <style>
+        /* Style pour aligner les boutons côte à côte */
+        .button-container {
+            display: flex;
+            gap: 5px; /* Espacement entre les boutons */
+        }
+        .heart-button {
+            color: #fff; /* Couleur du texte */
+            border: none;
+            /*padding: 10px 15px;  Ajustez selon la taille souhaitée */
+            border-radius: 50%; /* Pour créer la forme de cœur */
+            cursor: pointer;
+        }
+      </style>
+
+          </div>
+
           <p> Les joueurs incarnent des médiums travaillant ensemble pour résoudre le mystère du meurtre d'un fantôme. 
             Ce dernier communique avec les médiums à travers des visions sous forme de cartes illustrées. Les médiums doivent 
             interpréter ces images pour identifier le coupable, l'arme et le lieu du crime. "Mysterium" offre une expérience unique 
@@ -160,7 +278,27 @@
         </section>
 
         <section>
+
+          <div>
+          
           <a id="nav2" href="TheGame.php"> The Game </a>
+          <button class="heart-button">&#10084</button>
+        <style>
+        /* Style pour aligner les boutons côte à côte */
+        .button-container {
+            display: flex;
+            gap: 5px; /* Espacement entre les boutons */
+        }
+        .heart-button {
+            color: #fff; /* Couleur du texte */
+            border: none;
+            /*padding: 10px 15px;  Ajustez selon la taille souhaitée */
+            border-radius: 50%; /* Pour créer la forme de cœur */
+            cursor: pointer;
+        }
+      </style>
+
+          </div>
           <p> Jeu de collaboration, de coordination et de stratégie ! Les joueurs travaillent ensemble pour poser toutes les cartes 
             numérotées dans deux piles croissantes et deux piles décroissantes. Cependant, les règles strictes limitent la communication 
             entre les joueurs, rendant le défi plus complexe. Avec des décisions tactiques et une coordination précise, les participants 
@@ -182,7 +320,26 @@
         </section>
 
         <section>
+
+          <div>
           <a id="nav2" href="Mind.php"> Mind </a>
+          <button class="heart-button">&#10084</button>
+        <style>
+        /* Style pour aligner les boutons côte à côte */
+        .button-container {
+            display: flex;
+            gap: 5px; /* Espacement entre les boutons */
+        }
+        .heart-button {
+            color: #fff; /* Couleur du texte */
+            border: none;
+            /*padding: 10px 15px;  Ajustez selon la taille souhaitée */
+            border-radius: 50%; /* Pour créer la forme de cœur */
+            cursor: pointer;
+        }
+      </style>
+
+          </div>
           <p> "Mind" est un jeu de société minimaliste et stimulant qui teste la synchronisation mentale des joueurs. Chaque participant détient 
             une série de cartes numérotées, et l'objectif est de poser les cartes dans l'ordre croissant. Cependant, le défi réside dans le fait 
             que les joueurs ne peuvent pas communiquer verbalement ou visuellement sur la valeur de leurs cartes. La coopération silencieuse et 
@@ -204,7 +361,26 @@
         </section>
 
         <section>
+
+          <div>
           <a id="nav2" href="WhenIDream.php"> When I Dream </a>
+          <button class="heart-button">&#10084</button>
+        <style>
+        /* Style pour aligner les boutons côte à côte */
+        .button-container {
+            display: flex;
+            gap: 5px; /* Espacement entre les boutons */
+        }
+        .heart-button {
+            color: #fff; /* Couleur du texte */
+            border: none;
+            /*padding: 10px 15px;  Ajustez selon la taille souhaitée */
+            border-radius: 50%; /* Pour créer la forme de cœur */
+            cursor: pointer;
+        }
+      </style>
+
+          </div>
           <p> "When I Dream" est un jeu de société imaginatif et onirique qui plonge les joueurs dans un monde de rêves. Un joueur incarne le rêveur, 
             tandis que les autres joueurs jouent le rôle d'esprits bienveillants ou malveillants. Pendant la phase de rêve, le rêveur porte un bandeau 
             et écoute les indices donnés par les autres joueurs pour deviner les mots associés à son rêve. Les esprits tentent d'influencer le rêveur 
