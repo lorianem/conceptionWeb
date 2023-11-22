@@ -84,10 +84,6 @@
         }
       </style>
       </div>
-              <?php
-              
-
-              ?>
         <p> Dixit est un jeu de société créatif et enchanteur où les joueurs utilisent des cartes illustrées pour raconter 
             des histoires. Chaque joueur choisit une carte de sa main en fonction d'une phrase ou d'un mot secret qu'il donne. 
             Les autres joueurs sélectionnent également une carte de leur choix qui correspondrait à la description. Les cartes 
@@ -114,7 +110,7 @@
 
         <div>
           <a id="nav2" href="Monopoly.php"> Monopoly </a>
-          <button class="heart-button">&#10084</button>
+          <button class="heart-button"href="code/systemeDeLike.php?t=0&id=<? $id ?>">&#10084</button>
           <style>
           /* Style pour aligner les boutons côte à côte */
           .button-container {
@@ -156,7 +152,7 @@
 
           <div>
           <a id="nav2" href="Catane.php"> Catane </a>
-          <button class="heart-button">&#10084</button>
+          <button class="heart-button"href="code/systemeDeLike.php?t=0&id=<? $id ?>">&#10084</button>
         <style>
         /* Style pour aligner les boutons côte à côte */
         .button-container {
@@ -198,7 +194,7 @@
 
           <div>
           <a id="nav2" href="Cluedo.php"> Cluedo </a>
-          <button class="heart-button">&#10084</button>
+          <button class="heart-button"href="code/systemeDeLike.php?t=0&id=<? $id ?>">&#10084</button>
         <style>
         /* Style pour aligner les boutons côte à côte */
         .button-container {
@@ -240,7 +236,7 @@
 
           <div>
           <a id="nav2" href="Mysterium.php"> Mysterium </a>
-          <button class="heart-button">&#10084</button>
+          <button class="heart-button"href="code/systemeDeLike.php?t=0&id=<? $id ?>">&#10084</button>
         <style>
         /* Style pour aligner les boutons côte à côte */
         .button-container {
@@ -282,7 +278,7 @@
           <div>
           
           <a id="nav2" href="TheGame.php"> The Game </a>
-          <button class="heart-button">&#10084</button>
+          <button class="heart-button"href="code/systemeDeLike.php?t=0&id=<? $id ?>">&#10084</button>
         <style>
         /* Style pour aligner les boutons côte à côte */
         .button-container {
@@ -323,7 +319,7 @@
 
           <div>
           <a id="nav2" href="Mind.php"> Mind </a>
-          <button class="heart-button">&#10084</button>
+          <button class="heart-button" href="code/systemeDeLike.php?t=0&id=<? $id ?>">&#10084</button>
         <style>
         /* Style pour aligner les boutons côte à côte */
         .button-container {
@@ -364,7 +360,7 @@
 
           <div>
           <a id="nav2" href="WhenIDream.php"> When I Dream </a>
-          <button class="heart-button">&#10084</button>
+          <button class="heart-button" href="code/systemeDeLike.php?t=0&id=<? $id ?>">&#10084</button>
         <style>
         /* Style pour aligner les boutons côte à côte */
         .button-container {
@@ -389,8 +385,12 @@
         </section>
     </div>
 
+    <?php include "systemeDeLike.php"?>
 
+    
 </body>
+
+
 </html>
 
 <html>

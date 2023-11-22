@@ -5,6 +5,7 @@
 
 if(isset($_GET['etat'],$_GET['id']) AND !empty($_GET['etat']) AND !empty($_GET['id'])) {
     $getid = (int) $_GET['id'];
+    $gitt = (int) $ 
 
     $check = $site_jeux->prepare('SELECT id FROM favories WHERE id = ?');
     $check->execute(array($getid));

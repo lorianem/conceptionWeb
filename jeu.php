@@ -10,10 +10,38 @@
     <title>Titre de la Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        /* Style pour la ligne sélectionnée */
+        .selected-row {
+            background-color: #d4edda; /* Utilisez la couleur de fond de votre choix */
+        }
+    </style>    <style>
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Aligner les éléments en haut */
+        }
+
+        .flex-container > section {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .flex-container > section:last-child {
+            margin-right: 0; /* Supprimer la marge à droite pour le dernier élément */
+        }
+
+        .img-container img {
+            max-width: 2%; /* Réduire la largeur de l'image à 100% de la largeur du conteneur */
+            height: auto; /* Maintenir le rapport hauteur/largeur original de l'image */
+        }
+    </style>
 </head>
 
 <body>
     <main>
+      <div class="flex-container" style="margin : 20px;">
         <section class='center'>
             <style>
                 .center {
@@ -22,8 +50,8 @@
             </style>
             <?php
             // Charger les informations dynamiques de l'administrateur depuis la base de données
-            // Vous devez remplacer "votre_image.jpg" par le chemin vers l'image fournie par l'administrateur
-            $imagePath = "votre_image.jpg"; 
+            
+            $imagePath = "chemin_image.jpg"; 
             ?>
             <img src="<?= $imagePath ?>" class="img-thumbnail" alt="Error" width="350px" height="80px">
         </section>
@@ -43,7 +71,108 @@
                 <button type="button" class="btn btn-warning">Rejoindre la partie</button>
             </div>
         </section>
+
+        <section class='center'>
+            <style>
+                .center{
+                    text-align: center;
+                }
+            </style>
+            <img src="image/jeux/Dixit.jpg" class="img-thumbnail" alt="Error"
+            width="350px"
+            height="80px">
+        </section>
+
+        <section>
+        <h2>Créneaux des parties</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Places</th>
+                    <th scope="col">Date/Heure</th>
+                    <th scope="col">Niveau</th>
+                    <th scope="col">Durée</th>
+                    <!-- Suppression de la colonne Participants -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Première ligne de données -->
+                <tr onclick="selectRow(this)">
+                    <td><div>
+                        <input type="checkbox" id="scales" checked />
+                        <label for="scales"></label>
+                        </div>
+                    </td>
+                    <td>20</td>
+                    <td>30-11-2023 à 18:00</td>
+                    <td>Intermédiaire</td>
+                    <td>2 heures</td>
+                </tr>
+                <!-- Deuxième ligne de données -->
+                <tr onclick="selectRow(this)">
+                <td><div>
+                        <input type="checkbox" id="scales" checked />
+                        <label for="scales"></label>
+                        </div>
+                    </td>
+                    <td>15</td>
+                    <td>22-11-2023 à 14:30</td>
+                    <td>Débutant</td>
+                    <td>1.5 heures</td>
+                </tr>
+                <!-- Ajoutez d'autres lignes de données dynamiques ici -->
+            </tbody>
+        </table>
+        </section>
+      </div>
     </main>
+
+    <script>
+        function selectRow(row) {
+            var isRoxSelected = true;
+            // Supprime la classe 'selected-row' de toutes les lignes
+            var rows = document.querySelectorAll('tbody tr');
+            rows.forEach(function (row) {
+                row.classList.remove('selected-row');
+            });
+
+            // Ajoute la classe 'selected-row' à la ligne sélectionnée
+            row.classList.add('selected-row');
+        }
+
+        if (isRowSelected) {
+        row.classList.add('selected-row');
+        }
+
+        function toggleCheckbox(checkbox) {
+            // Empêche la propagation de l'événement pour éviter de déclencher la sélection de ligne
+            event.stopPropagation();
+        }
+    </script>
+
+<?php
+$placesRestantes = $places - 1;
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($isRowSelected) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["nom_du_bouton"])){
+        $pseudo = $_POST['pseudo'];
+
+
+        $stmt = $pdo->prepare("INSERT INTO planning (places, date, niveau, duree, participants) VALUES ($placesRestantes, $date, $niveau, $duree, $pseudo)");
+        $stmt->execute([$placesRestantes, $date, $niveau, $duree, $pseudo]);
+
+    // Réponse de succès (ou erreur selon le cas)
+        echo json_encode(['success' => true, 'message' => 'Vous avez rejoint la partie avec succès.']);
+        }
+        else {
+    // S'il essaie d'appuyer sur le bouton sans cocher aucune case
+        echo 'Choisissez au moins un créneau.';
+        }
+    }
+}
+?>
+
 </body>
 
 </html>
