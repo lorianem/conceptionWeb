@@ -1,41 +1,21 @@
+<?php include("connection_BDD.php") ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Système de Like</title>
-  <style>
-    /* Ajoutez du style pour le bouton de like en forme de cœur */
-    .like-button {
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: #555;
+<?php
+if(isset($_POST['like'])){
+    $q = "SELECT * FROM likes WHERE `username` = '".$_SESSION['recieveruser']."'";
+    $r = mysqli_query($con, $q);
+    $count  = mysqli_num_rows($r);
+    if ($count == "0") {
+        $q1 = "INSERT INTO likes (`username`, `likecount`)VALUES('".$_SESSION['recieveruser']."', '1')";
+        $result1 = mysqli_query($con, $q1);
+    } else {
+        while($row = mysqli_fetch_array($r)) {
+            $liked = $row['likecount'];
+        }
+        $likeus = ++$liked;
+        $q2    = "UPDATE likes SET likecount='".$likeus."' WHERE username = '".$_SESSION['recieveruser']."'";
+        $result2 = mysqli_query($con, $q2);
     }
-
-    .liked {
-      color: #ff0000; /* Changez la couleur pour indiquer que l'élément est aimé */
-    }
-  </style>
-</head>
-<body>
-
-  <script>
-    // Ajoutez du JavaScript pour gérer les clics sur le bouton de like
-    let isLiked = false;
-    let likeCount = 0;
-
-    function toggleLike() {
-      isLiked = !isLiked;
-      likeCount += isLiked ? 1 : -1;
-
-      document.getElementById('like-count').innerText = likeCount;
-      document.getElementById('like-button').classList.toggle('liked', isLiked);
-    }
-  </script>
-
-</body>
-</html>
+}
+?>
 

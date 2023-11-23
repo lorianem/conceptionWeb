@@ -1,5 +1,38 @@
 <?php include("code/EnTete.php") ?>
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accueil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Aligner les éléments en haut */
+        }
+
+        .flex-container > section {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .flex-container > section:last-child {
+            margin-right: 0; /* Supprimer la marge à droite pour le dernier élément */
+        }
+
+        .img-container img {
+            max-width: 2%; /* Réduire la largeur de l'image à 100% de la largeur du conteneur */
+            height: auto; /* Maintenir le rapport hauteur/largeur original de l'image */
+        }
+    </style>
+</head>
+
+<body>
+</br>
 <h1>HOME</h1>
         <style>
                 h1 {
@@ -79,13 +112,6 @@
 
 
     <div class="flex-container" style="margin : 40px;">
-        <section>
-            <h5 style="center">Monopoly</h5>
-            <p> Le Monopoly est un jeu où les joueurs achètent, échangent et construisent des propriétés pour accumuler des richesses. 
-                En lançant les dés, ils se déplacent autour du plateau, perçoivent des loyers et négocient pour devenir le magnat 
-                immobilier le plus prospère. Le jeu mêle stratégie financière, négociations et rebondissements inattendus. </p>
-        </section>
-
         <section class='center'>
             <style>
                 .center{
@@ -96,8 +122,15 @@
             width="350px"
             height="80px">
         </section>
-    </div>
 
+        <section>
+            <h5 style="center">Monopoly</h5>
+            <p> Le Monopoly est un jeu où les joueurs achètent, échangent et construisent des propriétés pour accumuler des richesses. 
+                En lançant les dés, ils se déplacent autour du plateau, perçoivent des loyers et négocient pour devenir le magnat 
+                immobilier le plus prospère. Le jeu mêle stratégie financière, négociations et rebondissements inattendus. </p>
+        </section>
+    </div>
+</body>
 
 
 
