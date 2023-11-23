@@ -46,7 +46,7 @@
 				<td align="center">  <?= $event['dateDebut'] ?>  </td>
 				<td align="center">  <?= $event['duree'] ?> heures </td>
 				<td align="center">  <?= $event['niveau'] ?>  </td>
-				
+				<td align="center"> Se désinscrire  </td>
 			<?php }
 		}?>
 		</tr>
@@ -57,7 +57,7 @@
 	<table id="planning" align="center" class="table table-striped">
 		<thead>
 		    <tr>
-		      <th colspan="5">Mon Historique</th>
+		      <th colspan="4">Mon Historique</th>
 		    </tr>
 	    </thead>
 	    <tr>
