@@ -2,6 +2,11 @@
 <?php include("code/relocalisationVisiteur.php")?>
 <?php  $dateActuelle = date("Y-m-d H:i:s");?>
 
+<?php 
+
+
+
+ ?>
 
 <h1 align="center"> PROFIL </h1>
 
@@ -9,9 +14,10 @@
 	<h2 align="center">Les plannings</h2><br>
 	<table id="planning" align="center" class="table table-striped" >
 		<thead>
-	    <tr>
-	      <th colspan="5">Mon planning</th>
-	    </tr>
+		    <tr>
+		      <th colspan="5">Mon planning</th>
+		    </tr>
+	    </thead>
 	    <tr>
 	    	<td align="center">Jeux</td>
 	    	<td align="center">Date</td>
@@ -40,7 +46,7 @@
 				<td align="center">  <?= $event['dateDebut'] ?>  </td>
 				<td align="center">  <?= $event['duree'] ?> heures </td>
 				<td align="center">  <?= $event['niveau'] ?>  </td>
-				<td align="center">  desinscription  </td>
+				
 			<?php }
 		}?>
 		</tr>
@@ -50,14 +56,16 @@
 
 	<table id="planning" align="center" class="table table-striped">
 		<thead>
-	    <tr>
-	      <th colspan="5">Mon Historique</th>
-	    </tr>
+		    <tr>
+		      <th colspan="5">Mon Historique</th>
+		    </tr>
+	    </thead>
 	    <tr>
 	    	<td align="center">Jeux</td>
 	    	<td align="center">Date</td>
 	    	<td align="center" >Temps (H)</td>
 	    	<td align="center">Niveau</td>
+	    	
 
 	    </tr>
 		
@@ -88,5 +96,5 @@
 
 
 	</table>
-</section>
+
 </section>
