@@ -32,7 +32,7 @@
     </style>
 </head>
 <body>
-
+    
     <h1>HOME</h1>
         <style>
                 h1 {
@@ -104,6 +104,7 @@
         </section>
     </div>
 
+    <?php include ("PiedPage.php")?>
 
 </body>
 </html>

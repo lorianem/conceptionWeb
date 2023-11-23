@@ -1,76 +1,65 @@
-<?php include("code/EnTete.php") ?>
-<?php include("code/relocalisationVisiteur.php") ?>
+<?php include("code/EnTete.php"); ?>
+<?php include("code/relocalisationVisiteur.php"); ?>
 
 <!doctype html>
 <html lang="fr">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Titre de la Page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
-        /* Style pour la ligne sélectionnée */
         .selected-row {
-            background-color: #d4edda; /* Utilisez la couleur de fond de votre choix */
+            background-color: #d4edda;
         }
-    </style>    <style>
         .flex-container {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start; /* Aligner les éléments en haut */
+            align-items: flex-start;
         }
-
         .flex-container > section {
             flex: 1;
             margin-right: 20px;
         }
-
         .flex-container > section:last-child {
-            margin-right: 0; /* Supprimer la marge à droite pour le dernier élément */
+            margin-right: 0;
         }
-
         .img-container img {
-            max-width: 2%; /* Réduire la largeur de l'image à 100% de la largeur du conteneur */
-            height: auto; /* Maintenir le rapport hauteur/largeur original de l'image */
+            max-width: 100%;
+            height: auto;
+        }
+        .center {
+            text-align: center;
         }
     </style>
 </head>
-
 <body>
-    <main>
-      <div class="flex-container" style="margin : 20px;">
-        <section class='center'>
-            <style>
-                .center {
-                    text-align: center;
-                }
-            </style>
-            <?php
-            // Charger les informations dynamiques de l'administrateur depuis la base de données
-            
-            $imagePath = "chemin_image.jpg"; 
-            ?>
-            <img src="<?= $imagePath ?>" class="img-thumbnail" alt="Error" width="350px" height="80px">
-        </section>
 
-        <section>
-            <?php
-            // Charger les informations dynamiques de l'administrateur depuis la base de données
-            $titrePage = "Titre Dynamique";
-            $textePage = "Description dynamique de la page.";
-            $urlReglesJeu = "lien_vers_regles_du_jeu.php";
-            ?>
-            <h5 style="text-align: center;"><?= $titrePage ?></h5>
-            <p><?= $textePage ?></p>
-            <a id="nav2" href="<?= $urlReglesJeu ?>"> Règles du jeu </a>
-            <br><br>
-            <div class="d-grid gap-2 col-2 mx-auto">
-                <button type="button" class="btn btn-warning">Rejoindre la partie</button>
-            </div>
-        </section>
+<main>
+<div class="flex-container" style="margin: 20px;">
+            <section class='center'>
+                <?php
+                $imagePath = "chemin_image.jpg"; 
+                ?>
+                <img src="<?= $imagePath ?>" class="img-thumbnail" alt="Error" width="350px" height="80px">
+            </section>
+
+            <section>
+                <?php
+                $titrePage = "Titre Dynamique";
+                $textePage = "Description dynamique de la page.";
+                $urlReglesJeu = "lien_vers_regles_du_jeu.php";
+                ?>
+                <h5 style="text-align: center;"><?= $titrePage ?></h5>
+                <p><?= $textePage ?></p>
+                <a id="nav2" href="<?= $urlReglesJeu ?>">Règles du jeu</a>
+                <br><br>
+                <div class="d-grid gap-2 col-2 mx-auto">
+                    <button type="button" class="btn btn-warning">Rejoindre la partie</button>
+                </div>
+            </section>
+
 
         <section class='center'>
             <style>
@@ -125,8 +114,7 @@
             </tbody>
         </table>
         </section>
-      </div>
-    </main>
+    </div>
 
     <script>
         function selectRow(row) {
