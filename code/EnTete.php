@@ -40,16 +40,16 @@
 						{
 							?>
 								<li class="nav-item">
-									<a class="nav-link" id="nav2" href="jeux.php"> jeux </a>
+									<a class="nav-link" id="nav2" href="jeux.php"> Jeux </a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="nav3" href="planning.php"> planning </a>
+									<a class="nav-link" id="nav3" href="planning.php"> Planning </a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" id="nav5" href="profil.php">Profil</a> 
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="nav6" href="code/deconnection.php">deconnection</a>
+									<a class="nav-link" id="nav6" href="code/deconnection.php">Déconnection</a>
 								</li>
 		s
 									
@@ -59,19 +59,19 @@
 						{
 							?>
 								<li class="nav-item">
-									<a class="nav-link" id="nav2" href="jeux.php"> jeux </a>
+									<a class="nav-link" id="nav2" href="jeux.php"> Jeux </a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="nav3" href="planning.php"> planning </a>
+									<a class="nav-link" id="nav3" href="planning.php"> Planning </a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="nav4" href="admin.php"> admin </a>
+									<a class="nav-link" id="nav4" href="admin.php"> Admin </a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" id="nav5" href="profil.php">Profil</a> 
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="nav6" href="code/deconnection.php">deconnection</a>
+									<a class="nav-link" id="nav6" href="code/deconnection.php">Déconnection</a>
 								</li>
 
 								

@@ -50,28 +50,25 @@
     <nav>
         <img src="image/jeux-societe-voyage.jpg" class="img-fluid" alt="Error">
     </nav>
-    <div class="container text-center">
-        <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-1">
-    
-                <section class="col">
-                    <h2>Qui sommes-nous?</h2>
-                    <p>Nous sommes un regroupement de passionnés de jeux de société, ou des néophytes souhaitant découvrir les jeux de société. Notre local est situé dans le cœur de Rouen, n'hésitez pas à nous rendre visite.</p>
-                </section>
-
-                <section class="col">
-                    <h3>Que faisons-nous?</h3>
-                    <p>Nous organisons des activités autour des jeux de société. Parmi ceux-ci :
-                        <br> 
-                        - Découverte de jeux de société
-                        <br> 
-                        - Des jeux de rôles
-                        <br>
-                        - Des tournois
-                    </p>
-                </section>
-
-        </div>
+     <div class="flex-container" style="margin : 20px;">
+        <section>
+            <h2>Qui sommes-nous?</h2>
+            <p>Nous sommes un regroupement de passionnés de jeux de société, ou des néophytes souhaitant découvrir les jeux de société. Notre local est situé dans le cœur de Rouen, n'hésitez pas à nous rendre visite.</p>
+        </section>
+        
+        <section>
+            <h3>Que faisons-nous?</h3>
+            <p>Nous organisons des activités autour des jeux de société. Parmi ceux-ci :
+                <br> 
+                - Découverte de jeux de société
+                <br> 
+                - Des jeux de rôles
+                <br>
+                - Des tournois
+            </p>
+            </section>
     </div>
+
     
     
     
