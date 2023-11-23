@@ -3,12 +3,25 @@
 <?php  $dateActuelle = date("Y-m-d H:i:s");?>
 
 <?php 
+if(isset($_POST["desinscription"]))
+{
+  $eventExist= $bdd->prepare("SELECT * FROM planning WHERE id= ? ");
+  $eventExist->execute(array($_POST["desinscription"]));
+  $exist = $eventExist->rowCount();
+  if($exist==1)
+  {
+    $desinscription= $bdd->prepare("DELETE FROM inscription WHERE id_users=? AND id_planning=?");
+    $desinscription->execute(array($_SESSION['id'],$_POST["desinscription"]));
+  }
 
+}
 
 
  ?>
 
 <h1 align="center"> PROFIL </h1>
+
+
 
 <section>
 	<h2 align="center">Les plannings</h2><br>
@@ -46,7 +59,7 @@
 				<td align="center">  <?= $event['dateDebut'] ?>  </td>
 				<td align="center">  <?= $event['duree'] ?> heures </td>
 				<td align="center">  <?= $event['niveau'] ?>  </td>
-				<td align="center"> Se désinscrire  </td>
+				<td align="center"><form method="POST"> <button value="<?= $event['id'] ?>" name="desinscription"type="submit">Se désinscrire </button>  </form> </td>
 			<?php }
 		}?>
 		</tr>

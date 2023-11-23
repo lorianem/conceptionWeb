@@ -51,7 +51,6 @@
 								<li class="nav-item">
 									<a class="nav-link" id="nav6" href="code/deconnection.php">Déconnection</a>
 								</li>
-		s
 									
 							<?php  
 						}
@@ -59,7 +58,7 @@
 						{
 							?>
 								<li class="nav-item">
-									<a class="nav-link" id="nav2" href="jeux.php"> Jeux </a>
+									<a class="nav-link" id="nav2" href="jeux2.php"> Jeux </a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" id="nav3" href="planning.php"> Planning </a>
