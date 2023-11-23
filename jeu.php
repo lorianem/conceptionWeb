@@ -37,9 +37,27 @@ if(isset($_POST["sinscription"]))
   }
 
 }
+?>
 
+<?php 
+if(isset($_POST["addFavorie"]))
+{
 
- ?>
+  $addFav= $bdd->prepare("INSERT INTO favories(id_users,id_jeux) VALUES(?,?)");
+  $addFav->execute(array($_SESSION['id'],$jeu["id"]));
+
+}
+?>
+
+<?php 
+if(isset($_POST["suppFavorie"]))
+{
+  $suppFav= $bdd->prepare("DELETE FROM favories WHERE id_users=? AND id_jeux=?");
+  $suppFav->execute(array($_SESSION['id'],$jeu["id"]));
+}
+
+?>
+
 <section>
 
   <div class="card mb-3" >
@@ -51,8 +69,19 @@ if(isset($_POST["sinscription"]))
       <div class="card-body">
         <h5 class="card-title"><?= $jeu["nom"]; ?></h5>
         <p class="card-text">T<?= $jeu["description"]?></p>
-        <p class="card-text"><a  href="document/regle/<?= $jeu["nom"]; ?>.pdf" download="<?= $jeu["nom"]; ?>.pdf">Télécharger le fichier</a></p>
-        <button class="card-text" >Ajouter aux favories</button>
+        <p class="card-text"><a  href="document/regle/<?= $jeu["nom"]; ?>.pdf" >Règle du jeu</a></p>
+        <?php
+          $reqFavorie = $bdd->prepare("SELECT id FROM favories WHERE id_users= ? AND id_jeux = ?  ");
+          $reqFavorie->execute(array($_SESSION['id'], $jeu["id"]));
+          $countFavorie = $reqFavorie->rowCount();
+          if ($countFavorie == 0)
+          { ?>
+            <form method="POST"> <button name="addFavorie"type="submit">Ajouter aux favories</button>  </form> 
+          <?php }
+          else
+          { ?>
+            <form method="POST"> <button name="suppFavorie"type="submit">Supprimer des favories</button>  </form> 
+          <?php } ?> 
       </div>
     </div>
   </div>
