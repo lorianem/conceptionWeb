@@ -138,10 +138,68 @@ if (isset($_POST['subSuppEvent']))
 
 ?>
 
+
 <?php
 
-?>
+	if (isset($_POST['subModifJeu'])) 
+	{
+		$idMod = $_POST["modJeuSelect"];
+		if(isset($_POST["modDescription"]) && !empty($_POST["modDescription"]))
+		{
+			$description = htmlspecialchars($_POST["modDescription"]);
+			$req = $bdd->prepare("UPDATE jeux SET description = ? WHERE id = ?"); 
+			$req->execute(array($description,$idMod));
+		}
+		if(isset($_FILES['modRegle_jeu']) AND !empty($_FILES['modRegle_jeu']['name']))
+		{
+			$extension_regle = array('pdf');
+			$extensionRegleUpload = strtolower(substr(strrchr($_FILES['modRegle_jeu']['name'], '.'), 1));
+			if(in_array($extensionRegleUpload,$extension_regle))
+			{
+				$req = $bdd->prepare("SELECT * FROM jeux WHERE id = ?"); 
+				$req->execute(array($idMod));
+				$jeu = $req->fetch();
 
+				$cheminRegle = "document/regle/".$jeu["nom"].".".$extensionRegleUpload;
+	            $resultat = move_uploaded_file($_FILES['modRegle_jeu']['tmp_name'], $cheminRegle);
+			}
+
+		}
+		if(isset($_FILES['modImage_jeu']) AND !empty($_FILES['modImage_jeu']['name']))
+		{
+			$extension_image = array('jpg', 'jpeg', 'png');
+			$extensionImageUpload = strtolower(substr(strrchr($_FILES['modImage_jeu']['name'], '.'), 1));
+			
+
+			if(in_array($extensionImageUpload, $extension_image))
+			{
+				$req = $bdd->prepare("SELECT * FROM jeux WHERE id = ?"); 
+				$req->execute(array($idMod));
+				$jeu = $req->fetch();
+				
+				$cheminImage = "image/jeux/".$jeu["nom"].".".$extensionImageUpload;
+	            $resultat = move_uploaded_file($_FILES['modImage_jeu']['tmp_name'], $cheminImage);
+			}
+
+		}
+		if(isset($_POST["modNom"]) && !empty($_POST["modNom"]))
+		{
+			$nom = ucfirst(htmlspecialchars($_POST["modNom"]));
+
+			$req = $bdd->prepare("SELECT * FROM jeux WHERE id = ?"); 
+			$req->execute(array($idMod));
+			$jeu = $req->fetch();
+			$extension = strtolower(substr(strrchr($jeu["image"], '.'), 1));
+			rename("image/jeux/" . $jeu["image"] , "image/jeux/" . $nom . "." . $extension);
+			rename("document/regle/".$jeu["nom"].".pdf", "document/regle/".$nom.".pdf");
+
+			$upd = $bdd->prepare("UPDATE jeux SET nom = ?, image = ? WHERE id = ?"); 
+			$upd->execute(array($nom, $nom.".".$extension ,$idMod));
+		}
+
+	}
+
+?>
 <section id="ajoutJeu" >
 	<h2>Ajout d'un nouveau jeu</h2><br>
 	<form method="POST" enctype="multipart/form-data">
@@ -172,7 +230,7 @@ if (isset($_POST['subSuppEvent']))
 	<h2>Modification jeu</h2>
 	<form method="POST" enctype="multipart/form-data">
 	<div class="mb-3"><label class="form-label">Jeu : </label>
-					<select class="form-control"  id="jeuSelect" name="jeuSelect">
+					<select class="form-control"  id="modJeuSelect" name="modJeuSelect">
 						<?php 
 							$requetes = $bdd->prepare("SELECT * FROM jeux"); 
 						    $requetes->execute();
@@ -185,16 +243,20 @@ if (isset($_POST['subSuppEvent']))
 			</div>
 
 		<div class="mb-3">
+			<label class="form-label">Modification nom : </label>
+			<input class="form-control" type="text" name="modNom"> 
+		</div>
+		<div class="mb-3">
 			<label class="form-label">Modification description : </label>
-			<input class="form-control" type="text" name="description"> 
+			<input class="form-control" type="text" name="modDescription"> 
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Modification des règles de jeu : </label>
-			<input class="form-control" type="file" name="regle_jeu"> 
+			<input class="form-control" type="file" name="modRegle_jeu"> 
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Image : </label>
-			<input class="form-control" type="file" name="image_jeu"> 
+			<input class="form-control" type="file" name="modImage_jeu"> 
 		</div>
 
 		<p class="error"><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutJeu."</font>"; } ?></p><br>
