@@ -131,4 +131,4 @@
 
 
 
-<?php include("code/PiedPage.html") ?>
+<?php include("code/piedPage.html") ?>

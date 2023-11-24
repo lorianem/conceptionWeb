@@ -122,5 +122,4 @@ if (isset($_POST['connexion'])) // Si on appui sur le bouton
          ?>
       </div>
 
-
-<?php include("code/PiedPage.html") ?>
+<?php include("code/piedPage.html") ?>

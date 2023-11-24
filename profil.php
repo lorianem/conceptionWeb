@@ -157,3 +157,5 @@ if(isset($_POST["suppMessage"]))
 	</table>
 
 </section>
+
+<?php include("code/piedPage.html") ?>

@@ -106,3 +106,5 @@ if(isset($_POST["sinscrire"]))
     </table>
   </div>
 </section>
+
+<?php include("code/piedPage.html") ?>

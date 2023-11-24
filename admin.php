@@ -8,7 +8,25 @@
 	}
 ?>
 
+<?php 
 
+if (isset($_POST['subSuppJeu'])) 
+{
+	$idJeu = $_POST["jeuSelectSupp"];
+	if(!empty($idJeu))
+	{
+		$requete = $bdd -> prepare("DELETE FROM jeux WHERE id = ?");
+		$requete -> execute(array($idJeu));
+		$msgSuppJeu = "Jeu supprimé";
+		
+	}
+	else
+	{
+		$msgSuppJeu = "Renseignez le jeu";
+	}
+}
+
+?>
 <?php 
 if (isset($_POST['subAjoutJeu']))
 {
@@ -128,28 +146,10 @@ if (isset($_POST['subAjoutEvent']))
 }
 ?>
 
-<?php 
 
-if (isset($_POST['subAjoutAdmin'])) 
-{
-	$pseudoAjoutAdmin = htmlspecialchars($_POST["pseudoAjoutAdmin"]);
-	if (!empty($pseudoAjoutAdmin)) {
-		$reqAdmin= $bdd->prepare("SELECT * FROM users WHERE pseudo = ?"); 
-		$reqAdmin->execute(array($pseudoAjoutAdmin));
-		$userExist = $reqAdmin->rowCount();
-		if($userExist == 1) 
-		{
-			$requete = $bdd -> prepare("UPDATE users SET role=1 WHERE pseudo=?");
-			$requete -> execute(array($pseudoAjoutAdmin));
-			$msgAjoutAdmin = "Admin ajouté";
-		}
-	}
-	else
-	{
-		$msgAjoutAdmin = "Veillez remplir tout les champs";
-	}
-}
-?>
+
+
+
 
 <?php 
 
@@ -162,7 +162,6 @@ if (isset($_POST['subSuppEvent']))
 		$reqMes->execute(array($idEvent));
 		while($resultMess = $reqMes -> fetch())
 		{
-			echo "a";
 			$messageAnnulation = "Bonjour <br> Nous sommes désolé de vous annoncer que la séance de jeux auquel vous étiez inscrit vient d'être annuler. <br>  Vous nous prions de nous excuser <br> <br> Cordialement toutes l'équipe";
 			$messageSupp = $bdd->prepare("INSERT INTO message(id_users, objet, message) VALUES (?, 'Annulation evenement', ?)");
 			$messageSupp->execute(array($resultMess["id_users"], $messageAnnulation));
@@ -179,6 +178,7 @@ if (isset($_POST['subSuppEvent']))
 }
 
 ?>
+
 
 
 <?php
@@ -253,6 +253,43 @@ if (isset($_POST['subSuppEvent']))
 		}
 	}
 ?>
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item">
+          <a class="nav-link" href="#ajoutJeu">Ajout jeu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#modifJeu">Modifier jeu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#ajoutCategorie">Ajout categorie</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#ajoutEvent">Ajout event</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#suppressionEvent">Suppression event</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#suppressionJeu">Suppresion jeu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#AfficherEvent">Afficher event</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#ajoutAdmin">Ajouter un admin</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <section id="ajoutJeu" >
 	<h2>Ajout d'un nouveau jeu</h2><br>
@@ -408,6 +445,30 @@ if (isset($_POST['subSuppEvent']))
 	</form>
 </section><br>
 
+
+
+
+<section id="suppressionJeu" >
+	<h2>Suppression Jeu </h2>
+	<form method="POST" enctype="multipart/form-data">
+		<div class="mb-3"> <label class="form-label">Catégorie : </label>
+				<select class="form-control" id="jeuSelectSupp" name="jeuSelectSupp">
+					<?php 
+						$requetes = $bdd->prepare("SELECT * FROM jeux"); 
+					    $requetes->execute();
+						while($resultat =  $requetes->fetch())
+						{?>
+							<option value="<?= $resultat['id'] ?>" ><?= $resultat['nom'] ?> </option>
+						<?php  }
+					?>
+				</select>
+		</div>
+		<p class="error"><?php if(isset($msgSuppJeu)) { echo '<font color="red">'.$msgSuppJeu."</font>";  } ?></p><br>
+
+		<div class="mb-3"><input class="btn btn-primary" id="subSuppJeu" value="Supprimer" type="submit" name="subSuppJeu"> </div>
+	</form>
+</section><br>
+
 <section id="AfficherEvent" >
 	<h2>Afficher la fiche évènement</h2>
 	<form method="POST" enctype="multipart/form-data">
@@ -450,4 +511,4 @@ if (isset($_POST['subSuppEvent']))
 
 
 
-<?php include("code/PiedPage.html") ?>
+<?php include("code/piedPage.html") ?>

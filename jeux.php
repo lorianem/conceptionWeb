@@ -1,15 +1,5 @@
-<?php
-// Démarrage de la session
-session_start();
-include 'code/EnTete.php';
-
-// Connexion à la base de données avec PDO
-try {
-    $bdd = new PDO('mysql:host=localhost;dbname=site_jeux;charset=utf8', 'root', 'root');
-} catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
-}
-?>
+<?php include("code/EnTete.php") ?>
+<?php include("code/relocalisationVisiteur.php")?>
 
 <!doctype html>
 <html lang="fr">
@@ -206,5 +196,4 @@ $possibleExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
 </body>
 
-<?php include 'PiedPage.php'?>
-</html>
+<?php include("code/piedPage.html") ?>

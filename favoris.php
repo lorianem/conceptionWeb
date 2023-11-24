@@ -38,3 +38,5 @@
 
   </div>
 </div>
+
+<?php include("code/piedPage.html") ?>

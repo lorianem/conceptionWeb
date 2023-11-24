@@ -92,6 +92,4 @@ if (isset($_POST["suppInscription"])) {
 
   </table>
 </section>
-<?php
-   
-?>
+<?php include("code/piedPage.html") ?>

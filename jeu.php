@@ -146,3 +146,4 @@ if(isset($_POST["suppFavorie"]))
     </table>
   </div>
 </section>
+<?php include("code/piedPage.html") ?>
