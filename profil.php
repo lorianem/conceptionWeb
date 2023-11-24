@@ -19,9 +19,55 @@ if(isset($_POST["desinscription"]))
 
  ?>
 
-<h1 align="center"> PROFIL </h1>
+<?php 
+if(isset($_POST["suppMessage"]))
+{
+  $eventExist= $bdd->prepare("SELECT * FROM message WHERE id= ? ");
+  $eventExist->execute(array($_POST["suppMessage"]));
+  $exist = $eventExist->rowCount();
+  if($exist==1)
+  {
+    $suppMessage= $bdd->prepare("DELETE FROM message WHERE id_users=? AND id=?");
+    $suppMessage->execute(array($_SESSION['id'],$_POST["suppMessage"]));
+  }
+
+}
 
 
+ ?>
+<h1 align="center"> PROFIL <?= $_SESSION['pseudo'] ?></h1>
+
+<section>
+	<h2 align="center">Messagerie</h2><br>
+	<table id="planning" align="center" class="table table-striped" >
+		<thead>
+		    <tr>
+		      <th colspan="5">Mon planning</th>
+		    </tr>
+	    </thead>
+	    <tr>
+	    	<td align="center">Objet</td>
+	    	<td align="center">Date</td>
+	    	<td align="center"> Suppresion</td>
+	    </tr>
+		
+		<?php 
+			$req = $bdd->prepare("SELECT * FROM message WHERE id_users = ? ");
+			$req->execute(array($_SESSION["id"]));
+			while($message = $req -> fetch())
+			{ ?>
+		<tr>
+
+				<td align="center">  <?= $message['objet'] ?>  </td>
+				<td >  <?= $message['message'] ?>  </td>
+				<td align="center"><form method="POST"> <button value="<?= $message['id'] ?>" name="suppMessage"type="submit">Supprimer</button>  </form> </td>
+	
+		<?php	}?>
+		</tr>
+
+
+	</table>
+</section>
 
 <section>
 	<h2 align="center">Les plannings</h2><br>
@@ -76,7 +122,7 @@ if(isset($_POST["desinscription"]))
 	    <tr>
 	    	<td align="center">Jeux</td>
 	    	<td align="center">Date</td>
-	    	<td align="center" >Temps (H)</td>
+	    	<td align="center" >Temps</td>
 	    	<td align="center">Niveau</td>
 	    	
 

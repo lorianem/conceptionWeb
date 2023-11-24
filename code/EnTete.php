@@ -11,7 +11,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	
 
 
@@ -39,8 +39,14 @@
 						if(($_SESSION['role'] == "0"))	
 						{
 							?>
-								<li class="nav-item">
-									<a class="nav-link" id="nav2" href="jeux.php"> Jeux </a>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Jeux
+									</a>
+									<ul class="dropdown-menu dropdown-menu-dark">
+										<li><a class="dropdown-item" href="jeux2.php">Tous les jeux</a></li>
+										<li><a class="dropdown-item" href="favoris.php">Mes favoris</a></li>
+									</ul>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" id="nav3" href="planning.php"> Planning </a>
@@ -57,8 +63,14 @@
 						elseif($_SESSION['role'] == "1")
 						{
 							?>
-								<li class="nav-item">
-									<a class="nav-link" id="nav2" href="jeux2.php"> Jeux </a>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="jeux2.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Jeux
+									</a>
+									<ul class="dropdown-menu dropdown-menu-dark">
+										<li><a class="dropdown-item" href="jeux2.php">Tous les jeux</a></li>
+										<li><a class="dropdown-item" href="favoris.php">Mes favoris</a></li>
+									</ul>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" id="nav3" href="planning.php"> Planning </a>
@@ -95,5 +107,5 @@
 			</div>
 			</div>
 		</div>
-	</nav> </br></br></br>
+	</nav> </br></br></br></br>
 

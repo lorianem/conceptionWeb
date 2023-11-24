@@ -6,7 +6,7 @@ body
 
 a
 {
-	text-decoration: none;
+	text-decoration:none;
 }
 
 
@@ -62,10 +62,6 @@ section
 	background: cyan ;
 }
 
-.error
-{
-	color: red;
-}
 
 
 

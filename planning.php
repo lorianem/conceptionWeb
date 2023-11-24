@@ -1,112 +1,108 @@
 <?php include("code/EnTete.php") ?>
 <?php include("code/relocalisationVisiteur.php")?>
+<?php  $dateActuelle = date("Y-m-d H:i:s");?>
 
-<!doctype html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Planning</title>
-        <style>
-            table {
-                border-collapse: collapse;
-                width: 60%; /* Largeur totale du tableau */
-                margin: 80px; /* Marge autour du tableau */
-            }
 
-            th, td {
-                border: 1px solid black;
-                padding: 5px;
-                text-align: center;
-            }
+<?php 
+if(isset($_POST["desinscription"]))
+{
+  $eventExist= $bdd->prepare("SELECT * FROM planning WHERE id= ? ");
+  $eventExist->execute(array($_POST["desinscription"]));
+  $exist = $eventExist->rowCount();
+  if($exist==1)
+  {
+    $desinscription= $bdd->prepare("DELETE FROM inscription WHERE id_users=? AND id_planning=?");
+    $desinscription->execute(array($_SESSION['id'],$_POST["desinscription"]));
+  }
 
-            th {
-                background-color: #f2f2f2; /* Couleur de fond pour les cellules d'en-tête */
-            }
+}
+?>
 
-            /* Définir une largeur spécifique pour chaque colonne */
-            th:nth-child(1), td:nth-child(1) {
-                width: 20%;
-            }
 
-            th:nth-child(2), td:nth-child(2) {
-                width: 15%;
-            }
+<?php 
+if(isset($_POST["sinscrire"]))
+{
+  $eventExist= $bdd->prepare("SELECT * FROM planning WHERE id= ? ");
+  $eventExist->execute(array($_POST["sinscrire"]));
+  $exist = $eventExist->rowCount();
+  if($exist==1)
+  {
+    $desinscription= $bdd->prepare("INSERT INTO inscription(id_users,id_planning) VALUES(?,?)");
+    $desinscription->execute(array($_SESSION['id'],$_POST["sinscrire"]));
+  }
 
-            th:nth-child(3), td:nth-child(3) {
-                width: 10%;
-            }
-
-            th:nth-child(4), td:nth-child(4) {
-                width: 25%;
-            }
-
-            th:nth-child(5), td:nth-child(5) {
-                width: 30%;
-            }
-        </style>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-
-    <body>
-
-        <h1>PLANNING<h1>
-        <style>
-            h1 {
-                display: flex;
-                justify-content: center; /* Centre horizontalement */
-                align-items: center; /* Centre verticalement */
-                height: 10vh; /* Pour occuper la hauteur complète de la vue */
-            }
-
-            .center-text {
-                text-align: center; /* Centre le texte à l'intérieur du conteneur */
-            }
-        </style>
-
-        <style>
-            table {
-                border-collapse: collapse; /* Fusionner les bordures de cellules */
-                width: 100%; /* Occuper la largeur complète du conteneur parent */
-            }
-
-            th, td {
-                border: 1px solid black; /* Bordure de chaque cellule */
-                padding: 8px; /* Espace intérieur de la cellule */
-                text-align: center; /* Centrer le texte dans la cellule */
-            }
-        </style>
-
-        <main>
-            <table >
-                <tr>
-                    <th>Jeu</th>
-                    <th>Niveau</th>
-                    <th>Date</th>
-                    <th>Rang</th>
-                    <th>Etat</th>
-                    <style>
-                        th {
-                            font-size : 1.0em;
-                            
-                        }
-                    </style>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </main>
-        
-
-    </body>
+}
+?>
 
 
 
 
-</html>
+
+
+
+
+
+<section>
+  <div>
+    <h2 align="center">Evènements à venir </h2><br>
+    <table id="planning" align="center" class="table table-striped" >
+      <thead>
+          <tr>
+            <th colspan="6">Mon planning</th>
+          </tr>
+        </thead>
+        <tr>
+          <td align="center">Jeux</td>
+          <td align="center">Date</td>
+          <td align="center" >Temps</td>
+          <td align="center">Niveau</td>
+          <td align="center">Place</td>
+          <td align="center">Inscription</td>
+        </tr>
+      <?php     
+
+        $reqEvent = $bdd -> prepare("SELECT * FROM planning WHERE dateDebut > ? ");
+        $reqEvent->execute(array($dateActuelle));
+        while ($event = $reqEvent->fetch()) 
+        { 
+          $reqJeu = $bdd -> prepare("SELECT * FROM jeux WHERE id = ?");
+          $reqJeu->execute(array($event["id_jeux"]));
+          $jeu = $reqJeu->fetch();
+
+          $reqInscrit = $bdd->prepare("SELECT * FROM inscription WHERE id_planning= ? ");
+          $reqInscrit->execute(array($event["id"]));
+          $countInscrit = $reqInscrit->rowCount();
+
+          $reqInscription = $bdd->prepare("SELECT * FROM inscription WHERE id_planning= ? AND id_users= ? ");
+          $reqInscription->execute(array($event["id"], $_SESSION['id']));
+          $Inscription = $reqInscription->rowCount();
+
+
+
+        ?>
+          <tr>
+            <td align="center">  <?= $jeu['nom'] ?>  </td>
+            <td align="center">  <?= $event['dateDebut'] ?>  </td>
+            <td align="center">  <?= $event['duree'] ?> heures </td>
+            <td align="center">  <?= $event['niveau'] ?>  </td>
+            <td align="center">  <?= $countInscrit ?> /  <?= $event["places"] ?></td> <?php 
+            if($Inscription != 0 ) // affiche inscrit
+            { ?>
+              <td align="center"><form method="POST"> <button value="<?= $event['id'] ?>" name="desinscription"type="submit">Se désinscrire </button>  </form> </td>
+            <?php } 
+            elseif( $countInscrit == $event["places"])// affiche complet
+            { ?>
+              <td align="center"> Complet </td>
+            <?php } 
+            elseif($Inscription == 0)
+            { ?>
+              <td align="center"><form method="POST"> <button value="<?= $event['id'] ?>" name="sinscrire"type="submit"> S'inscrire </button>  </form> </td>
+            <?php }  ?>
+          </tr>
+        <?php }
+      ?>
+     
+
+    </table>
+  </div>
+</section>

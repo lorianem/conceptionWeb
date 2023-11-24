@@ -30,8 +30,7 @@ if (isset($_POST['subAjoutJeu']))
 
 			if($jeuExist == 0)
 			{
-				$requete = $bdd -> prepare("INSERT INTO jeux(nom, description, id_categorie) VALUES(?, ?, ?)");
-				$requete -> execute(array($nom_jeu,$description_jeu,$cat_jeu));
+				
 				$extension_image = array('jpg', 'jpeg', 'png');
 				$extension_regle = array('pdf');
 
@@ -45,11 +44,32 @@ if (isset($_POST['subAjoutJeu']))
 
 	                $cheminRegle = "document/regle/".$nom_jeu.".".$extensionRegleUpload;
 	                $resultat = move_uploaded_file($_FILES['regle_jeu']['tmp_name'], $cheminRegle);
+
+	                $requete = $bdd -> prepare("INSERT INTO jeux(nom, description, id_categorie, image) VALUES(?, ?, ?, ?)");
+					$requete -> execute(array($nom_jeu,$description_jeu,$cat_jeu, $nom_jeu.".".$extensionImageUpload));
+
+	                $msgAjoutJeu = "Jeu ajouté";
 				}
+				else
+				{
+					$msgAjoutJeu = "Respectez les bon format pour les fichier, pdf pour les règles";
+				}
+			}
+			else 
+			{
+				$msgAjoutJeu = "Ce jeu existe déjà";
 			}	
 
 		}
+		else
+		{
+			$msgAjoutJeu = "Veillez remplir tout les champs";
+		}
 	}
+	else
+		{
+			$msgAjoutJeu = "Veillez joindre les fichiers";
+		}
 } 
 ?>
 
@@ -68,7 +88,16 @@ if (isset($_POST['subAjoutCategorie']))
 		{
 			$requete = $bdd -> prepare("INSERT INTO categorie(nom) VALUES(?)");
 			$requete -> execute(array($nom_categorie));
+			$msgAjoutCat = "Catégorie ajouté";
 		}
+		else
+		{
+			$msgAjoutJeu = "Catégorie déjà existante";
+		}
+	}
+	else
+	{
+		$msgAjoutCat = "Veillez remplir tout les champs";
 	}
 }
 ?>
@@ -90,6 +119,11 @@ if (isset($_POST['subAjoutEvent']))
 	{    
 		$requete = $bdd -> prepare("INSERT INTO planning(id_jeux, places, dateDebut, niveau, duree) VALUES (?,?,?,?,?)");
 		$requete -> execute(array($idJeu, $nbPlace, $date,$difficulte, $duree));
+		$msgAjoutEvent = "Évènement ajouté";
+	}
+	else
+	{
+		$msgAjoutEvent = "Veillez remplir tout les champs";
 	}
 }
 ?>
@@ -98,19 +132,21 @@ if (isset($_POST['subAjoutEvent']))
 
 if (isset($_POST['subAjoutAdmin'])) 
 {
-	echo "1";
 	$pseudoAjoutAdmin = htmlspecialchars($_POST["pseudoAjoutAdmin"]);
 	if (!empty($pseudoAjoutAdmin)) {
-		echo "1";
 		$reqAdmin= $bdd->prepare("SELECT * FROM users WHERE pseudo = ?"); 
 		$reqAdmin->execute(array($pseudoAjoutAdmin));
 		$userExist = $reqAdmin->rowCount();
 		if($userExist == 1) 
 		{
-			echo "1";
 			$requete = $bdd -> prepare("UPDATE users SET role=1 WHERE pseudo=?");
 			$requete -> execute(array($pseudoAjoutAdmin));
+			$msgAjoutAdmin = "Admin ajouté";
 		}
+	}
+	else
+	{
+		$msgAjoutAdmin = "Veillez remplir tout les champs";
 	}
 }
 ?>
@@ -126,12 +162,18 @@ if (isset($_POST['subSuppEvent']))
 		$reqMes->execute(array($idEvent));
 		while($resultMess = $reqMes -> fetch())
 		{
-			$messageAnnulation = "Bonjour \n Nous sommes désolé de vous annoncer que la séance de jeux auquel vous étiez inscrit vient d'être annuler. \n Vous nous prions de nous excuser\n\n Cordialement toutes l'équipe";
-			$messageSupp = $bdd->prepare("INSERT INTO message(id_users, objet, message) VALUES (?, 'Annulation evenement auquel vous étiez inscrit', ?)");
+			echo "a";
+			$messageAnnulation = "Bonjour <br> Nous sommes désolé de vous annoncer que la séance de jeux auquel vous étiez inscrit vient d'être annuler. <br>  Vous nous prions de nous excuser <br> <br> Cordialement toutes l'équipe";
+			$messageSupp = $bdd->prepare("INSERT INTO message(id_users, objet, message) VALUES (?, 'Annulation evenement', ?)");
 			$messageSupp->execute(array($resultMess["id_users"], $messageAnnulation));
 		}
 		$requete = $bdd -> prepare("DELETE FROM planning WHERE id = ?"); // Table en delete cascade donc les lignes dans inscription sont aussi supprimée
 		$requete -> execute(array($idEvent));
+		$msgSuppEvent = "Evènement supprimé";
+	}
+	else
+	{
+		$msgSuppEvent = "Veillez remplir tout les champs";
 	}
 	
 }
@@ -200,6 +242,18 @@ if (isset($_POST['subSuppEvent']))
 	}
 
 ?>
+
+<?php
+	if(isset($_POST["subAffEvent"]))
+	{
+		if(isset($_POST["eventSelectAff"]) && !empty($_POST["eventSelectAff"]))
+		{
+			header("Location: event.php?id=" . $_POST["eventSelectAff"]);
+			exit();  
+		}
+	}
+?>
+
 <section id="ajoutJeu" >
 	<h2>Ajout d'un nouveau jeu</h2><br>
 	<form method="POST" enctype="multipart/form-data">
@@ -259,7 +313,7 @@ if (isset($_POST['subSuppEvent']))
 			<input class="form-control" type="file" name="modImage_jeu"> 
 		</div>
 
-		<p class="error"><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutJeu."</font>"; } ?></p><br>
+		<p class="error"><?php if(isset($msgModifJeu)) {  echo '<font color="red">'.$msgModifJeu."</font>"; } ?></p><br>
 
 		<div><input class="btn btn-primary" id="subModifJeu" type="submit" name="subModifJeu"> </div>
 	</form>		
@@ -333,8 +387,9 @@ if (isset($_POST['subSuppEvent']))
 		<div class="mb-3"> <label class="form-label">Catégorie : </label>
 				<select class="form-control" id="eventSelect" name="eventSelect">
 					<?php 
-						$requetes = $bdd->prepare("SELECT * FROM planning"); 
-					    $requetes->execute();
+						$dateActuelle = date("Y-m-d H:i:s");
+						$requetes = $bdd->prepare("SELECT * FROM planning WHERE dateDebut > ?"); 
+					    $requetes->execute(array($dateActuelle));
 						while($resultat =  $requetes->fetch())
 						{
 							$reqJeu = $bdd->prepare("SELECT * FROM jeux WHERE id=?"); 
@@ -353,6 +408,32 @@ if (isset($_POST['subSuppEvent']))
 	</form>
 </section><br>
 
+<section id="AfficherEvent" >
+	<h2>Afficher la fiche évènement</h2>
+	<form method="POST" enctype="multipart/form-data">
+		<div class="mb-3"> <label class="form-label">Catégorie : </label>
+				<select class="form-control" id="eventSelectAff" name="eventSelectAff">
+					<?php 
+						$dateActuelle = date("Y-m-d H:i:s");
+						$requetes = $bdd->prepare("SELECT * FROM planning WHERE dateDebut > ?"); 
+					    $requetes->execute(array($dateActuelle));
+						while($resultat =  $requetes->fetch())
+						{
+							$reqJeu = $bdd->prepare("SELECT * FROM jeux WHERE id=?"); 
+					    	$reqJeu->execute(array($resultat['id_jeux']));
+					   		$resulJeu =  $reqJeu->fetch();
+							?>
+
+							<option value="<?= $resultat['id'] ?>" >   <?= $resulJeu['nom'] ?>, date :   <?= $resultat['dateDebut'] ?> </option>
+						<?php  }
+					?>
+				</select>
+		</div>
+		
+		<div class="mb-3"><input class="btn btn-primary" id="subAffEvent" value="Afficher" type="submit" name="subAffEvent"> </div>
+	</form>
+</section><br>
+
 
 <section id="ajoutAdmin" >
 	<form method="POST" enctype="multipart/form-data">
@@ -361,7 +442,7 @@ if (isset($_POST['subSuppEvent']))
 			<label class="form-label">Pseudo du nouvel admin : </label>
 			<input class="form-control"type="text" id="pseudoAjoutAdmin" name="pseudoAjoutAdmin">
 		</div>
-		<p class="error"><?php if(isset($msgAjoutJeu)) {  echo '<font color="red">'.$msgAjoutAdmin."</font>"; } ?></p><br>
+		<p class="error"><?php if(isset($msgAjoutAdmin)) {  echo '<font color="red">'.$msgAjoutAdmin."</font>"; } ?></p><br>
 		<div class="mb-3"> <input class="btn btn-primary" id="subAjoutAdmin" value="Ajouter" type="submit" name="subAjoutAdmin"> </div>
 		
 	</form>

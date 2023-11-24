@@ -68,7 +68,7 @@ if(isset($_POST["suppFavorie"]))
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title"><?= $jeu["nom"]; ?></h5>
-        <p class="card-text">T<?= $jeu["description"]?></p>
+        <p class="card-text"><?= $jeu["description"]?></p>
         <p class="card-text"><a  href="document/regle/<?= $jeu["nom"]; ?>.pdf" >Règle du jeu</a></p>
         <?php
           $reqFavorie = $bdd->prepare("SELECT id FROM favories WHERE id_users= ? AND id_jeux = ?  ");
